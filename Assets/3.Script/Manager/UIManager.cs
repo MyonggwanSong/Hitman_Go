@@ -1,0 +1,143 @@
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIManager : BehaviourSingleton<UIManager>
+{
+    protected override bool IsDontdestroy() => true;
+
+    // panels
+    [Header("panels")]
+
+    public GameObject mainPanel;
+    public GameObject chapterSelectPanel;
+    public GameObject settingsPanel;
+    public GameObject quitPanel;
+    //public GameObject resetGamePanel;
+
+    // Effect
+    [Header("Effect")]
+    public GameObject fadeEffect;
+
+    [Header("Setting")]
+    public Text soundText;
+    public Text musicText;
+
+    void Start()
+    {
+        SetUI();
+
+
+
+
+    }
+
+    void SetUI()
+    {
+        SFXOn(true);
+        BGMOn(true);
+    }
+
+
+#region button Click Event
+
+    public void OnClickedGo()
+    {
+        StartCoroutine(ShowOnly(chapterSelectPanel));
+    }
+    public void OnClickedBack2Main()
+    {
+        StartCoroutine(ShowOnly(mainPanel));
+    }
+    public void OnClickedExit()
+    {
+        StartCoroutine(ShowOnly(quitPanel));
+    }
+    public void OnClickedSettings()
+    {
+        StartCoroutine(ShowOnly(settingsPanel));
+    }
+    
+    
+    public void OnClickedQuitGame()
+    {
+        Application.Quit();
+
+    }
+    #endregion
+
+
+
+    public void OnButtonHoverEnter(Button btn)
+    {
+        btn.transform.localScale = btn.transform.localScale * 1.2f;
+    }
+    public void OnButtonHoverExit(Button btn)
+    {
+        btn.transform.localScale = btn.transform.localScale / 1.2f;
+    }
+
+
+    IEnumerator ShowOnly(GameObject target)
+    {
+        fadeEffect.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        mainPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        chapterSelectPanel.SetActive(false);
+        quitPanel.SetActive(false);
+        //resetGamePanel.SetActive(false);
+
+        if (target != null)
+            target.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        fadeEffect.SetActive(false);
+
+    }
+
+   
+    bool _s = true;
+
+    public void SFXOn(bool on)
+    {
+        on = !_s;
+        _s = on;
+        if (on)
+        {
+            soundText.text = "On";
+            // connect Audio Manager
+
+        }
+        else
+        {
+            soundText.text = "Off";
+            // connect Audio Manager
+        }
+    }
+
+    bool _b = true;
+    public void BGMOn(bool on)
+    {
+
+        on = !_b;
+        _b = on;
+        if (on)
+        {
+            musicText.text = "On";
+            // connect Audio Manager
+
+        }
+        else
+        {
+            musicText.text = "Off";
+            // connect Audio Manager
+
+        }
+    }
+
+
+
+}
