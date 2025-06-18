@@ -177,6 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4794449364867300}
+  - component: {fileID: 1091618418277375710}
   m_Layer: 8
   m_Name: PlayerPawn
   m_TagString: Untagged
@@ -201,6 +202,21 @@ Transform:
   - {fileID: 4843064984541569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1091618418277375710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138907535865285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac07016dcd9e834d940f5be2b197dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  moveDistance: 5
+  moveSpeed: 5
 --- !u!1 &1252589413730504
 GameObject:
   m_ObjectHideFlags: 0
