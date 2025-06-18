@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 2875723451216005949}
   - component: {fileID: 5413077938963950899}
   m_Layer: 0
-  m_Name: Level1
+  m_Name: Chapter1_Level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
