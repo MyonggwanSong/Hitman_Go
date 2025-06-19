@@ -155,7 +155,6 @@ MonoBehaviour:
   - {fileID: 2459623587006512293}
   - {fileID: 5395210321133810905}
   - {fileID: 1038413307203447976}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -201,8 +200,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5988142860187455736}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -478,7 +477,6 @@ MonoBehaviour:
   - {fileID: 5410868318126139678}
   - {fileID: 6016339630224856658}
   - {fileID: 7417295133665628064}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -651,7 +649,6 @@ MonoBehaviour:
   - {fileID: 6016339630224856658}
   - {fileID: 2484639531874901478}
   - {fileID: 6265756764491926792}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -824,7 +821,6 @@ MonoBehaviour:
   - {fileID: 4619896696062991110}
   - {fileID: 8030608620028812236}
   - {fileID: 6175276403543001310}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -997,7 +993,6 @@ MonoBehaviour:
   - {fileID: 7417295133665628064}
   - {fileID: 5410868318126139678}
   - {fileID: 3823528437071871659}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -1043,8 +1038,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 987202562726418047}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -1299,8 +1294,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2059918471871458799}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -1728,8 +1723,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3940557982561994668}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -1811,8 +1806,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6181816767536461693}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -1894,8 +1889,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 447178769932674880}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -1977,8 +1972,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3257726944790038085}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -2187,7 +2182,6 @@ MonoBehaviour:
   - {fileID: 6265756764491926792}
   - {fileID: 3063117886021248483}
   - {fileID: 2484639531874901478}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -2360,7 +2354,6 @@ MonoBehaviour:
   - {fileID: 8030608620028812236}
   - {fileID: 6175276403543001310}
   - {fileID: 8140119599893244521}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -2533,7 +2526,6 @@ MonoBehaviour:
   - {fileID: 1889548016490006408}
   - {fileID: 8281676806467498610}
   - {fileID: 2064571312285168217}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -2579,8 +2571,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 874358971357370333}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -2662,8 +2654,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3713876706653095618}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -2745,8 +2737,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2041018844258880848}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -2955,7 +2947,6 @@ MonoBehaviour:
   - {fileID: 4103857514251823275}
   - {fileID: 3650197164271751892}
   - {fileID: 6310584252001058231}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -3001,8 +2992,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8317466637221620080}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -3084,8 +3075,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8851144535662907639}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -3294,7 +3285,6 @@ MonoBehaviour:
   - {fileID: 6310584252001058231}
   - {fileID: 4619896696062991110}
   - {fileID: 4103857514251823275}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -3340,8 +3330,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4500364736688623085}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -3423,8 +3413,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5120945828815147103}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -3835,7 +3825,6 @@ GameObject:
   - component: {fileID: 6554704392144966168}
   - component: {fileID: 3469058541296181241}
   - component: {fileID: 6310584252001058231}
-  - component: {fileID: 7008726662520904312}
   - component: {fileID: 5552978304814135176}
   m_Layer: 0
   m_Name: Node0
@@ -3979,25 +3968,10 @@ MonoBehaviour:
   - {fileID: 3823528437071871659}
   - {fileID: 2459623587006512293}
   - {fileID: 0}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
   isLineDrawn: 0
---- !u!114 &7008726662520904312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5167521209011544383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e1a3b89897c33540ae360bcba319f88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingNode: {fileID: 6310584252001058231}
-  player: {fileID: 0}
 --- !u!114 &5552978304814135176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4039,8 +4013,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5899251723899966889}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -4122,8 +4096,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3375789395879530017}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -4205,8 +4179,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1941506004506393707}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -4288,8 +4262,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6554704392144966168}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -4498,7 +4472,6 @@ MonoBehaviour:
   - {fileID: 8281676806467498610}
   - {fileID: 8140119599893244521}
   - {fileID: 0}
-  - {fileID: 0}
   isGoalNode: 1
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -4544,8 +4517,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3510627347545904161}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}
@@ -4753,7 +4726,6 @@ MonoBehaviour:
   connectedNodes:
   - {fileID: 1889548016490006408}
   - {fileID: 3650197164271751892}
-  - {fileID: 0}
   - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
@@ -5100,7 +5072,6 @@ MonoBehaviour:
   - {fileID: 3063117886021248483}
   - {fileID: 1038413307203447976}
   - {fileID: 0}
-  - {fileID: 0}
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
@@ -5146,8 +5117,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1479144512073179482}
   m_LocalEulerAnglesHint: {x: 90, y: 349.3845, z: 0}

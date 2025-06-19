@@ -35,6 +35,8 @@ public class DrawLine : MonoBehaviour
             lrObj.transform.parent = this.transform;
 
             LineRenderer lr = lrObj.AddComponent<LineRenderer>();
+            lrObj.transform.rotation = Quaternion.Euler(90, 0, 0);
+            lr.alignment = LineAlignment.TransformZ;
             lr.material = lineMaterial != null ? lineMaterial : new Material(Shader.Find("Sprites/Default"));
             lr.startWidth = nodeManager.drawLineThickness;
             lr.endWidth = nodeManager.drawLineThickness;
@@ -65,8 +67,8 @@ public class DrawLine : MonoBehaviour
         Vector3 endPoint = targetNode.transform.position;
         Vector3 direction = (endPoint - startPoint).normalized;
 
-        float normalNodeRadius = 0.09f; 
-        float goalNodeRadius = 0.28f;
+        float normalNodeRadius = 0.1f; 
+        float goalNodeRadius = 0.6f;
 
         float nodeRadius = targetNode.isGoalNode ? goalNodeRadius : normalNodeRadius; // 노드의 크기많큼 덜 그리기위함
         startPoint += direction * normalNodeRadius;

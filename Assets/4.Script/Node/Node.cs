@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,14 +11,31 @@ public class Node : MonoBehaviour
     [SerializeField] Material normalNodeMaterial;
     [SerializeField] Material goalNodeMaterial;
 
+    
+  
+
+
     [HideInInspector] public bool isLineDrawn = false; // 이미 라인 그렸는지 여부
     MeshRenderer meshrenderer;
+    void Awake()
+    {
+        foreach (Node n in connectedNodes)
+        {
+            if (n == null)
+            {
+                connectedNodes.Remove(n);
+            }
+        }
+      
+    }
 
     void OnValidate()
     {
+    
         meshrenderer = GetComponentInChildren<MeshRenderer>();
         meshrenderer.material = isGoalNode ? goalNodeMaterial : normalNodeMaterial;
     }
+
 
 
 }
