@@ -11,10 +11,9 @@ public class Node : MonoBehaviour
     [SerializeField] Material normalNodeMaterial;
     [SerializeField] Material goalNodeMaterial;
 
+    public bool hasItem;         // 아이템 있음?
+    public bool hasBush;         // 숨을 수 있음?
     
-  
-
-
     [HideInInspector] public bool isLineDrawn = false; // 이미 라인 그렸는지 여부
     MeshRenderer meshrenderer;
     void Awake()
@@ -28,6 +27,8 @@ public class Node : MonoBehaviour
         }
       
     }
+
+
 
     void OnValidate()
     {

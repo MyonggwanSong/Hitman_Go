@@ -1,202 +1,88 @@
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class AStarSearch<TNode, TContext> where TNode : AStarSearch<TNode, TContext>.ISearchNode
+public static class AStarSearch
 {
-	public enum Status
-	{
-		Pending = 0,
-		Succeeded = 1,
-		NoPath = 2
-	}
+    public static List<Node> FindPath(Node start, Node goal)
+    {
+        List<Node> openSet = new List<Node>();      // 탐색 후보
+        HashSet<Node> closedSet = new HashSet<Node>(); // 이미 탐색한 노드
 
-	public interface ISearchNode
-	{
-		IEnumerable<Connection> GetConnections(TContext context);
+        Dictionary<Node, Node> cameFrom = new Dictionary<Node, Node>(); // 경로 추적용
+        Dictionary<Node, float> gScore = new Dictionary<Node, float>(); // 시작 → 해당 노드 거리
+        Dictionary<Node, float> fScore = new Dictionary<Node, float>(); // 예상 총 거리 (g + h)
 
-		float EstimateCostToDestination(TNode destination, TContext context);
+        openSet.Add(start);
+        gScore[start] = 0;
+        fScore[start] = Heuristic(start, goal);
 
-		bool IsSameNodeThan(TNode otherNode, TContext context);
-	}
+        while (openSet.Count > 0)
+        {
+            Node current = GetLowestFScoreNode(openSet, fScore);
 
-	public struct Connection
-	{
-		public TNode ToNode;
+            if (current == goal)
+                return ReconstructPath(cameFrom, current);
 
-		public float Cost;
+            openSet.Remove(current);
+            closedSet.Add(current);
 
-		public Connection(TNode node, float cost)
-		{
-			ToNode = node;
-			Cost = cost;
-		}
-	}
+            foreach (Node neighbor in current.connectedNodes)
+            {
+                if (closedSet.Contains(neighbor)) continue;
 
-	public class Result
-	{
-		public Status Status;
+                float tentativeGScore = gScore[current] + Distance(current, neighbor);
 
-		public TNode[] Path;
+                if (!openSet.Contains(neighbor))
+                    openSet.Add(neighbor);
+                else if (tentativeGScore >= gScore.GetValueOrDefault(neighbor, float.PositiveInfinity))
+                    continue;
 
-		public float Cost;
+                cameFrom[neighbor] = current;
+                gScore[neighbor] = tentativeGScore;
+                fScore[neighbor] = gScore[neighbor] + Heuristic(neighbor, goal);
+            }
+        }
 
-		public Result(Status status)
-		{
-			Status = status;
-		}
-	}
+        // 경로 없음
+        return null;
+    }
 
-	private class ExpandedNode : IComparable<ExpandedNode>
-	{
-		public TNode Node;
+    private static float Heuristic(Node a, Node b)
+    {
+        return Vector3.Distance(a.transform.position, b.transform.position); // 유클리드 거리
+    }
 
-		public float CostFromStart;
+    private static float Distance(Node a, Node b)
+    {
+        return Vector3.Distance(a.transform.position, b.transform.position);
+    }
 
-		public float CostToDestination;
+    private static Node GetLowestFScoreNode(List<Node> nodes, Dictionary<Node, float> fScore)
+    {
+        Node bestNode = nodes[0];
+        float bestScore = fScore.GetValueOrDefault(bestNode, float.PositiveInfinity);
 
-		private ExpandedNode m_Parent;
+        foreach (var node in nodes)
+        {
+            float score = fScore.GetValueOrDefault(node, float.PositiveInfinity);
+            if (score < bestScore)
+            {
+                bestScore = score;
+                bestNode = node;
+            }
+        }
 
-		public int NbExpansions;
+        return bestNode;
+    }
 
-		public float TotalCost
-		{
-			get
-			{
-				return CostFromStart + CostToDestination;
-			}
-		}
-
-		public ExpandedNode Parent
-		{
-			get
-			{
-				return m_Parent;
-			}
-			set
-			{
-				NbExpansions = ((value != null) ? (value.NbExpansions + 1) : 0);
-				m_Parent = value;
-			}
-		}
-
-		public ExpandedNode(TNode n)
-		{
-			Parent = null;
-			Node = n;
-			CostFromStart = 0f;
-		}
-
-		public ExpandedNode(TNode n, float costFromStart, float costToDestination, ExpandedNode parent)
-		{
-			Node = n;
-			CostFromStart = costFromStart;
-			Parent = parent;
-			CostToDestination = costToDestination;
-		}
-
-		public int CompareTo(ExpandedNode other)
-		{
-			if (other == null)
-			{
-				return 1;
-			}
-			return (int)(1000f * (other.TotalCost - TotalCost));
-		}
-	}
-
-	private TNode Destination;
-
-	private TContext Context;
-
-	private List<ExpandedNode> m_OpenList = new List<ExpandedNode>();
-
-	private List<TNode> m_ClosedList = new List<TNode>();
-
-	public AStarSearch(TNode start, TNode destination, TContext context)
-	{
-		Destination = destination;
-		Context = context;
-		m_OpenList.Add(new ExpandedNode(start, 0f, start.EstimateCostToDestination(Destination, Context), null));
-	}
-
-	public Result Step()
-	{
-		if (m_OpenList.Count == 0)
-		{
-			return new Result(Status.NoPath);
-		}
-		int index = m_OpenList.Count - 1;
-		ExpandedNode expandedNode = m_OpenList[index];
-		m_OpenList.RemoveAt(index);
-		m_ClosedList.Add(expandedNode.Node);
-		if (expandedNode.Node.IsSameNodeThan(Destination, Context))
-		{
-			return BuildPath(expandedNode);
-		}
-		Connection connection;
-		foreach (Connection connection2 in expandedNode.Node.GetConnections(Context))
-		{
-			connection = connection2;
-			if (m_ClosedList.Exists((TNode x) => x.IsSameNodeThan(connection.ToNode, Context)))
-			{
-				continue;
-			}
-			float num = expandedNode.CostFromStart + connection.Cost;
-			int num2 = m_OpenList.FindIndex((ExpandedNode x) => x.Node.IsSameNodeThan(connection.ToNode, Context));
-			if (num2 < 0)
-			{
-				float costToDestination = connection.ToNode.EstimateCostToDestination(Destination, Context);
-				ExpandedNode newNode = new ExpandedNode(connection.ToNode, num, costToDestination, expandedNode);
-				InsertOpenNode(newNode);
-				continue;
-			}
-			ExpandedNode expandedNode2 = m_OpenList[num2];
-			if (num < expandedNode2.CostFromStart)
-			{
-				expandedNode2.CostFromStart = num;
-				expandedNode2.Parent = expandedNode;
-				if (num2 < m_OpenList.Count - 1 && num < m_OpenList[num2 + 1].CostFromStart)
-				{
-					m_OpenList.RemoveAt(num2);
-					InsertOpenNode(expandedNode2);
-				}
-			}
-		}
-		return null;
-	}
-
-	public Result Resolve()
-	{
-		Result result = null;
-		do
-		{
-			result = Step();
-		}
-		while (result == null);
-		return result;
-	}
-
-	private void InsertOpenNode(ExpandedNode newNode)
-	{
-		int num = m_OpenList.BinarySearch(newNode);
-		if (num < 0)
-		{
-			num = ~num;
-		}
-		m_OpenList.Insert(num, newNode);
-	}
-
-	private Result BuildPath(ExpandedNode node)
-	{
-		Result result = new Result(Status.Succeeded);
-		result.Cost = node.CostFromStart;
-		int num = node.NbExpansions + 1;
-		result.Path = new TNode[num];
-		while (node != null)
-		{
-			result.Path[--num] = node.Node;
-			node = node.Parent;
-		}
-		return result;
-	}
+    private static List<Node> ReconstructPath(Dictionary<Node, Node> cameFrom, Node current)
+    {
+        List<Node> totalPath = new List<Node> { current };
+        while (cameFrom.ContainsKey(current))
+        {
+            current = cameFrom[current];
+            totalPath.Insert(0, current);
+        }
+        return totalPath;
+    }
 }

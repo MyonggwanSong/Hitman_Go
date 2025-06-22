@@ -240,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4517497586924357}
   - component: {fileID: 95705771336194139}
+  - component: {fileID: 4275803589543131325}
   m_Layer: 8
   m_Name: AnimatedPawn
   m_TagString: Untagged
@@ -284,6 +285,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4275803589543131325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442460019701111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f2ff685c33fcd448ee328df8745fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1584692007776274
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,4 +548,6 @@ MonoBehaviour:
   moveSpeed: 5
   currentNode: {fileID: 0}
   nextNode: {fileID: 0}
-  aiRootNodes: []
+  aiRouteNodes: []
+  isLookingPlayer: 0
+  animator: {fileID: 0}

@@ -9,6 +9,8 @@ public class GameManager : BehaviourSingleton<GameManager>
     public uint turn;
     public bool getTargetItem;
     public bool killedTarget;
+    public int enemyNum;
+    public int killedEnemyNum;
 
     #endregion
 }

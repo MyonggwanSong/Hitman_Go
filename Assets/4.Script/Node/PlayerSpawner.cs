@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
@@ -17,6 +18,7 @@ public class PlayerSpawner : MonoBehaviour
         Instantiate(player, startingNode.transform.position, rotation);
         player.currentNode = startingNode;
         
-       
+       player.allEnemies = FindObjectsOfType<EnemyControl>();
+       GameManager.I.enemyNum = player.allEnemies.Length;
     }
 }

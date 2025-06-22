@@ -158,6 +158,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &4753113830985562737
 MonoBehaviour:
@@ -480,6 +482,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &6647748000392406958
 MonoBehaviour:
@@ -652,6 +656,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &7972907303251501405
 MonoBehaviour:
@@ -824,6 +830,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &6980129994958841668
 MonoBehaviour:
@@ -996,6 +1004,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &795244187871848234
 MonoBehaviour:
@@ -1252,6 +1262,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &7691867685514932142
 MonoBehaviour:
@@ -1508,6 +1520,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &7674163125838614041
 MonoBehaviour:
@@ -1681,6 +1695,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &317087026866664249
 MonoBehaviour:
@@ -2185,6 +2201,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &2942322854236085867
 MonoBehaviour:
@@ -2357,6 +2375,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &6731121111636681240
 MonoBehaviour:
@@ -2529,6 +2549,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &2526611570547843515
 MonoBehaviour:
@@ -2950,6 +2972,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &4046461471044758882
 MonoBehaviour:
@@ -3288,6 +3312,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &5148667078307922735
 MonoBehaviour:
@@ -3627,6 +3653,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &3480541383092742314
 MonoBehaviour:
@@ -3800,6 +3828,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &6326374699346240826
 MonoBehaviour:
@@ -3971,6 +4001,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &5552978304814135176
 MonoBehaviour:
@@ -4475,6 +4507,8 @@ MonoBehaviour:
   isGoalNode: 1
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &1723808360399488150
 MonoBehaviour:
@@ -4730,6 +4764,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &3835491495606685775
 MonoBehaviour:
@@ -4903,6 +4939,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &8722288892502146435
 MonoBehaviour:
@@ -5075,6 +5113,8 @@ MonoBehaviour:
   isGoalNode: 0
   normalNodeMaterial: {fileID: 2100000, guid: 0141a3219be07954b8eee81e9108568e, type: 2}
   goalNodeMaterial: {fileID: 2100000, guid: 8810b629119f523409927dcc3f914365, type: 2}
+  hasItem: 0
+  hasBush: 0
   isLineDrawn: 0
 --- !u!114 &4242398761524836648
 MonoBehaviour:

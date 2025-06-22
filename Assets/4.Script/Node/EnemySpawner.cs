@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Node SpawnNode;
+    [SerializeField] Node SpawnNode;    // 스폰되는 노드
+    [SerializeField] Node TargetNode;   // AI 목적지 노드
+    [SerializeField] Transform deathZone;
+
     [SerializeField] EnemyControl Enemy;
 
 
@@ -14,8 +17,10 @@ public class EnemySpawner : MonoBehaviour
         direction.z = 0f;
         Quaternion rotation = Quaternion.Euler(direction);
 
-        Instantiate(Enemy, SpawnNode.transform.position, rotation);
         Enemy.currentNode = SpawnNode;
+        Enemy.targetNode = TargetNode;
+        Enemy.deathZone = deathZone;
+        Instantiate(Enemy, SpawnNode.transform.position, rotation);
         
        
     }

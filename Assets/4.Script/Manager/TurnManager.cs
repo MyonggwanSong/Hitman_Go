@@ -24,6 +24,5 @@ public class TurnManager : BehaviourSingleton<TurnManager>
         enemy.OnTurnChanged(currentTurn);
     }
 
-    Debug.Log("EnemyControl 대상에게 턴 이벤트 전송 완료.");
 }
 }
