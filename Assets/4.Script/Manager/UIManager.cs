@@ -1,14 +1,14 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using CustomInspector;
 
 public class UIManager : BehaviourSingleton<UIManager>
 {
     protected override bool IsDontdestroy() => true;
 
     // panels
-    [Header("panels")]
+    [Title("panels")]
 
     public GameObject mainPanel;
     public GameObject chapterSelectPanel;
@@ -17,10 +17,10 @@ public class UIManager : BehaviourSingleton<UIManager>
     //public GameObject resetGamePanel;
 
     // Effect
-    [Header("Effect")]
+    [Title("Effect")]
     public GameObject fadeEffect;
 
-    [Header("Setting")]
+    [Title("Setting")]
     public Text soundText;
     public Text musicText;
 

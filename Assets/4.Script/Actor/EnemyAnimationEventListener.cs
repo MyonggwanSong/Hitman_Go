@@ -17,7 +17,7 @@ public class EnemyAnimationEventListener : MonoBehaviour
     {
         if(s.ToLower() == "move")
         {
-            Debug.Log("애니 들어옴");
+            // 애니메이션 시작할 때 이벤트
         }
     }
 
@@ -27,7 +27,6 @@ public class EnemyAnimationEventListener : MonoBehaviour
         if (s.ToLower() == "move")
         {
             owner.animator.SetBool(AnmimatorHashes._MOVE, false);
-            Debug.Log("애니 나감");
         }
 
         if (s.ToLower() == "killed")
@@ -36,7 +35,6 @@ public class EnemyAnimationEventListener : MonoBehaviour
 
             owner.transform.position = owner.deathZone.position + new Vector3(-GameManager.I.killedEnemyNum*0.8f,0f,0f); // 죽었을때 떨어지는 위치
             owner.AnimateBool(AnmimatorHashes._FALLDOWN, true, AnmimatorHashes._KILLANIMATION, 3, false);
-            Debug.Log("애니 나감");
         }
     }
 }

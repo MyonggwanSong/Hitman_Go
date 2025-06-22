@@ -1,32 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomInspector;
 
 public class EnemyControl : MonoBehaviour
 {
-    [Header("Movement Attribute")]
+    [Title("Movement Attribute")]
     public float moveSpeed = 5f;
-    [Header("Mesh index")]
+    [Title("Mesh index")]
     [SerializeField] int mesheIndex;
 
-    [Header("Position states")]
+    [Title("Position states")]
     public Node currentNode = null;
     public Node nextNode;   // 다음 노드
     public List<Node> aiRouteNodes = new List<Node>();  // AI 경로의 노드들
 
 
-    [Header("AI Route target node")]
-    public Node targetNode;
+    [Title("AI Route target node")]
+    [ReadOnly]public Node targetNode;
 
-    public bool isLookingPlayer; // 플레이어 쳐다보는 중
+    [ReadOnly]public bool isLookingPlayer; // 플레이어 쳐다보는 중
 
     public Transform deathZone;
 
-    private bool isMoving = false;
+
     private bool isdead = false;
     private Coroutine _co = null;
     private MeshRenderer[] meshes;
-
     [HideInInspector] public Animator animator;
 
     void Awake()
@@ -37,24 +37,27 @@ public class EnemyControl : MonoBehaviour
         meshes = GetComponentsInChildren<MeshRenderer>();
         if (meshes == null)
             Debug.LogWarning("meshe 없음");
+
+
     }
 
     IEnumerator Start()
     {
-       yield return new WaitUntil(()=> currentNode != null);
+        yield return new WaitUntil(() => currentNode != null);
         SetInitializing();
 
         Vector3 lookDir = new Vector3(nextNode.transform.position.x, transform.position.y, nextNode.transform.position.z);
         transform.LookAt(lookDir);
-        
+
     }
+
+
+
     void SetInitializing()
     {
-        //TEMP
-        //int rnd = Random.Range(0, currentNode.connectedNodes.Count);
         aiRouteNodes = AStarSearch.FindPath(currentNode, targetNode);
         nextNode = aiRouteNodes[1];
-        //TEMP
+
 
         foreach (var m in meshes)
             m.gameObject.SetActive(false);
@@ -66,12 +69,13 @@ public class EnemyControl : MonoBehaviour
     public void OnTurnChanged(uint newTurn)
     {
         // 턴 넘어갔을 때 AI 동작
-        if(isdead) return;
+        if (isdead) return;
+
         AiMove();
 
     }
 
-int _i = 2;
+    int _i = 2;
     void AiMove()
     {
         if (currentNode.connectedNodes == null || currentNode.connectedNodes.Count == 0)
@@ -82,11 +86,11 @@ int _i = 2;
         OnEnemyTurn();
         //TEMP
         //int rnd = Random.Range(0, currentNode.connectedNodes.Count);
-        if(_i<aiRouteNodes.Count)
+        if (_i < aiRouteNodes.Count)
         {
 
-        nextNode = aiRouteNodes[_i];
-        _i ++;
+            nextNode = aiRouteNodes[_i];
+            _i++;
         }
         else
         {
@@ -112,28 +116,29 @@ int _i = 2;
 
     public bool CanSeePlayer(PlayerControl player)
     {
+        if (player.currentNode == nextNode)
+            isLookingPlayer = true;
         return isLookingPlayer; // 간단 예시
     }
 
     public void Kill()
     {
-        if(isdead) return;
+        if (isdead) return;
 
         Debug.Log("적 처치됨!");
         StopCoroutine(_co);
         AnimateBool(AnmimatorHashes._KILLED, true, AnmimatorHashes._KILLANIMATION, 3, false);
-        isdead =true;
-        GameManager.I.killedEnemyNum ++;
+        isdead = true;
+        GameManager.I.killedEnemyNum++;
     }
 
     IEnumerator MoveToPosition(Vector3 targetPos)
     {
-        isMoving = true;
         Vector3 startPos = transform.position;
         float time = 0f;
 
-          // 애니메이ㅣ션
-        AnimateBool(AnmimatorHashes._MOVE, true, AnmimatorHashes._MOVEANIMATION, 5,true);
+        // 애니메이ㅣ션
+        AnimateBool(AnmimatorHashes._MOVE, true, AnmimatorHashes._MOVEANIMATION, 5, true);
 
         while (time < 1f)
         {
@@ -145,9 +150,6 @@ int _i = 2;
         transform.position = targetPos;
         Vector3 lookDir = new Vector3(nextNode.transform.position.x, transform.position.y, nextNode.transform.position.z);
         transform.LookAt(lookDir);
-        isMoving = false;
-
-        
     }
 
     #region Animation

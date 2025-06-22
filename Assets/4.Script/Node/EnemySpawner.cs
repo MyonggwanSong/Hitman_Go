@@ -1,11 +1,18 @@
 using UnityEngine;
+using CustomInspector;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Title("Spawn Node")]
     [SerializeField] Node SpawnNode;    // 스폰되는 노드
-    [SerializeField] Node TargetNode;   // AI 목적지 노드
-    [SerializeField] Transform deathZone;
 
+    [Title("(AI Route) Target Node")]
+    [SerializeField] Node TargetNode;   // AI 목적지 노드
+    
+    [Title("Tomb")]
+    [SerializeField] Transform deathZone;
+    
+    [Title("Enmey Prefab")]
     [SerializeField] EnemyControl Enemy;
 
 

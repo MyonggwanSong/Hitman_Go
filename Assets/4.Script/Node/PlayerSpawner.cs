@@ -1,9 +1,12 @@
-using System.Linq;
 using UnityEngine;
+using CustomInspector;
 
 public class PlayerSpawner : MonoBehaviour
 {
+    [Title("Starting Node")]
     [SerializeField] Node startingNode;
+     [Title("Player Prefab")]
+
     [SerializeField] PlayerControl player;
 
 

@@ -17,7 +17,7 @@ public class AnimationEventListener : MonoBehaviour
     {
         if(s.ToLower() == "move")
         {
-            Debug.Log("애니 들어옴");
+            // 애니메이션 들어올 때 이벤트
         }
     }
 
@@ -26,14 +26,11 @@ public class AnimationEventListener : MonoBehaviour
         if (s.ToLower() == "move")
         {
             owner.animator.SetBool(AnmimatorHashes._MOVE, false);
-            Debug.Log("애니 나감");
         }
 
         if (s.ToLower() == "killed")
         {
-          
             owner.animator.SetBool(AnmimatorHashes._KILLED, false);
-            Debug.Log("애니 나감");
         }
     }
 }

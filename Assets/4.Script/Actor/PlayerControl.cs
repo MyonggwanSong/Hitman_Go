@@ -1,35 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomInspector;
 
 public class PlayerControl : MonoBehaviour
 {
     [HideInInspector] public Camera mainCamera;
-    [Header("Movement")]
+    [Title("Movement Attribute")]
     public float moveSpeed = 5f;
 
-    [Header("MoveSign to Connected Node")]
-    public GameObject moveSign;        // 움직일 수 있는 곳 화살표 프리팹
+    [Title("MoveSign to Connected Node")]
+    [SerializeField] private GameObject moveSign;        // 움직일 수 있는 곳 화살표 프리팹
+
+    [Title("Targets")]
+    [ReadOnly] public EnemyControl[] allEnemies;
+    // public Item[] allItems;
+
+    [Title("Now You Are Here")]
+    [ReadOnly] public Node currentNode; // 현재 위치한 노드
+
+    [HideInInspector] public Animator animator;
+
     private List<GameObject> arrowPool = new List<GameObject>();
     private Vector3 dragStartPos;   // 마우스 클릭위치
     private Vector3 dragEndPos;     // 마우스 땐 위치
     private bool isDragging = false;    // 마우스 클릭 중
-
-
-    [Header("Targets")]
-
-    public EnemyControl[] allEnemies;
-    // public Item[] allItems;
-
-
-    [HideInInspector] public Animator animator;
-
-    [Header("(Debug)Now You Are Here")]
-
-    public Node currentNode; // 현재 위치한 노드
     private Node targetNode; // 움직일 다음 노드
 
     private bool isMoving = false;
+
     void Awake()
     {
         mainCamera = Camera.main;
@@ -57,6 +56,8 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.I.isGameStart == false || GameManager.I.isGameover == true) return; //  시작전, 게임오버면 return
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // mouse Point to Ray
         RaycastHit hit;
 
@@ -76,7 +77,7 @@ public class PlayerControl : MonoBehaviour
             OnMouseButtenUp();
         }
     }
-
+#region  Input
     void OnMouseButtenDown()
     {
         transform.position += Vector3.up * 0.2f; // Mouse Clicked feedback
@@ -117,9 +118,9 @@ public class PlayerControl : MonoBehaviour
 
         isDragging = false;
     }
+#endregion
 
-
-    void MoveTo(Node targetNode)
+    void MoveTo(Node targetNode) 
     {
         if (targetNode != null)
         {
@@ -128,11 +129,11 @@ public class PlayerControl : MonoBehaviour
             CheckInteraction();
         }
 
-        else  
+        else
             Debug.Log("Can not move because no target Node.");
     }
 
-    void CheckInteraction()
+    void CheckInteraction() // 상효작용 체크
     {
         // 아이템
         if (currentNode.hasItem)
@@ -148,20 +149,15 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        // 적 검사
-        EnemyControl enemy = FindEnemyOnNode(currentNode);
+        // 적 유무 검사
+        bool _isKilledZone;
+        EnemyControl enemy = FindEnemyOnNode(currentNode, out _isKilledZone);
         if (enemy != null)
         {
-            if (enemy.CanSeePlayer(this))
-            {
-                // 적이 나 보고 있음 → 죽음
-                Die();
-            }
-            else
-            {
-                // 적 안봄 → 적 처치
+            if (_isKilledZone == false) // 적을 죽일 수 있는 노드
                 enemy.Kill();
-            }
+            else                    // 적이 날 죽일 수 있는 노드
+                Die();
         }
 
         // 골 확인
@@ -170,20 +166,27 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-    EnemyControl FindEnemyOnNode(Node node)
+    EnemyControl FindEnemyOnNode(Node node, out bool isKilldZone)  // boo
     {
         EnemyControl[] enemies = FindObjectsOfType<EnemyControl>();
         foreach (var enemy in enemies)
         {
-            if (enemy.currentNode == node) return enemy;
+            if (enemy.currentNode == node)
+            {
+                isKilldZone = false;
+                return enemy;
+            }
+            if (enemy.nextNode == node)
+            {
+                isKilldZone = true;
+                return enemy;
+            }
         }
+        isKilldZone = false;
         return null;
     }
 
-
-
     #region Movement
-
     public void UpdateArrowIndicators()
     {
         // 연결 노드 방향으로 화살표 세팅
@@ -238,9 +241,6 @@ public class PlayerControl : MonoBehaviour
 
         Node targetNode = GetConnectedNodeInDirection(targetDirection);
         return targetNode;
-
-     
-
     }
 
     Node GetConnectedNodeInDirection(Vector3 direction)
@@ -290,7 +290,7 @@ public class PlayerControl : MonoBehaviour
         Vector3 startPos = transform.position;
         float time = 0f;
         // 애니메이ㅣ션
-        AnimateBool(AnmimatorHashes._MOVE, true, AnmimatorHashes._MOVEANIMATION, 5,true);
+        AnimateBool(AnmimatorHashes._MOVE, true, AnmimatorHashes._MOVEANIMATION, 5, true);
 
         // 움직임
         while (time < 1f)
@@ -309,8 +309,6 @@ public class PlayerControl : MonoBehaviour
         Debug.Log($"turn : {GameManager.I.turn}" + $"\nCurrent Node : {currentNode.name}");
 
         isMoving = false;
-
-
     }
     #endregion
 
@@ -323,9 +321,11 @@ public class PlayerControl : MonoBehaviour
     {
         /* 은신 처리 */
     }
-    void Die()
+    void Die() // 사망처리
     {
-        /* 사망 처리 */
+        
+        AnimateBool(AnmimatorHashes._KILLED, true, AnmimatorHashes._KILLANIMATION, 3, true);
+        GameManager.I.isGameover = true;
     }
     void ClearStage()
     {

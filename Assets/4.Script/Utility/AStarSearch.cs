@@ -3,13 +3,20 @@ using UnityEngine;
 
 public static class AStarSearch
 {
+// 1. start를 openSet에 넣음.
+// 2. openSet에서 가장 예상 비용(fScore) 낮은 노드 꺼냄.
+// 3. 이웃 노드들 전부 검사 :
+//    >> 이미 갔다면 패스.
+//    >> 더 좋은 길이면 openSet에 추가 + 정보 갱신.
+// 4. goal 만나면 경로 복원.
+
     public static List<Node> FindPath(Node start, Node goal)
     {
         List<Node> openSet = new List<Node>();      // 탐색 후보
-        HashSet<Node> closedSet = new HashSet<Node>(); // 이미 탐색한 노드
+        HashSet<Node> closedSet = new HashSet<Node>(); // 이미 탐색한 노드(다시 탐색 불가용)
 
         Dictionary<Node, Node> cameFrom = new Dictionary<Node, Node>(); // 경로 추적용
-        Dictionary<Node, float> gScore = new Dictionary<Node, float>(); // 시작 → 해당 노드 거리
+        Dictionary<Node, float> gScore = new Dictionary<Node, float>(); // 시작 >> 해당 노드까지 거리
         Dictionary<Node, float> fScore = new Dictionary<Node, float>(); // 예상 총 거리 (g + h)
 
         openSet.Add(start);
@@ -49,7 +56,7 @@ public static class AStarSearch
 
     private static float Heuristic(Node a, Node b)
     {
-        return Vector3.Distance(a.transform.position, b.transform.position); // 유클리드 거리
+        return Vector3.Distance(a.transform.position, b.transform.position); // 노드 a,b의 실제 거리
     }
 
     private static float Distance(Node a, Node b)
