@@ -20,7 +20,7 @@ public class NodeManager : MonoBehaviour
         yield return new WaitForSeconds(GameManager.I.startDelay);
         GameManager.I.isGameStart = true; // 게임 시작
 
-        startingNode.gameObject.SetActive(true);
+        startingNode.mesh.gameObject.SetActive(true);
          if (startingNode != null)
         {
             dl.InitializeLineRenderers();

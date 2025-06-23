@@ -19,10 +19,15 @@ public class Node : MonoBehaviour
     [ReadOnly] public bool hasBush;         // 숨을 수 있음?
 
     [HideInInspector] public bool isLineDrawn = false; // 이미 라인 그렸는지 여부
+    [HideInInspector] public MeshRenderer mesh;
     MeshRenderer meshrenderer;
     void Awake()
     {
         connectedNodes.RemoveAll(node => node == null); // 지워진 노드 또는 연결이 안 되는 노드는 List에서 삭제
+        mesh = GetComponentInChildren<MeshRenderer>();      // animation casing
+        if (mesh == null)
+            Debug.LogWarning("Node ] mesh 없음");
+        mesh.gameObject.SetActive(false);
     }
 
 

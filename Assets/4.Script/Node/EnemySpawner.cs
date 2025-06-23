@@ -8,27 +8,36 @@ public class EnemySpawner : MonoBehaviour
 
     [Title("(AI Route) Target Node")]
     [SerializeField] Node TargetNode;   // AI 목적지 노드
-    
+
     [Title("Tomb")]
     [SerializeField] Transform deathZone;
-    
+
     [Title("Enmey Prefab")]
     [SerializeField] EnemyControl Enemy;
-
-
-   
+    [SerializeField] bool isStatic;
+    [SerializeField] int mesheIndex;
     void Start()
     {
-        Vector3 direction = (Camera.main.transform.forward - Camera.main.transform.position).normalized;
-        direction.x = 0f;
-        direction.z = 0f;
-        Quaternion rotation = Quaternion.Euler(direction);
+        EnemyControl spawnedEnemy = Instantiate(Enemy, SpawnNode.transform.position, transform.rotation);
+        SetInitialEnemy(spawnedEnemy);
 
-        Enemy.currentNode = SpawnNode;
-        Enemy.targetNode = TargetNode;
-        Enemy.deathZone = deathZone;
-        Instantiate(Enemy, SpawnNode.transform.position, rotation);
-        
-       
+      
+    }
+
+    void SetInitialEnemy(EnemyControl clone)
+    {
+        clone.currentNode = SpawnNode;
+        clone.targetNode = TargetNode;
+
+         Vector3 lookDir = new Vector3(clone.targetNode.transform.position.x, transform.position.y, clone.targetNode.transform.position.z);
+        clone.transform.LookAt(lookDir);
+
+
+        clone.deathZone = deathZone;
+        clone.isStatic = isStatic;
+        clone.mesheIndex = mesheIndex;
+      
+
+        clone.SetInitializing();
     }
 }

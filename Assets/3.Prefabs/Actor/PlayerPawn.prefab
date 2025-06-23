@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138907535865285}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.008463653, z: 0, w: 0.9999642}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -133,9 +133,11 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   moveSpeed: 5
   moveSign: {fileID: 2024004632971159907, guid: 6949c2f6af27f5148a4415d4313f4a9b, type: 3}
+  _l0: 0
   allEnemies: []
-  animator: {fileID: 0}
   currentNode: {fileID: 0}
+  _l1: 0
+  animator: {fileID: 0}
 --- !u!1 &1436260246090909
 GameObject:
   m_ObjectHideFlags: 0

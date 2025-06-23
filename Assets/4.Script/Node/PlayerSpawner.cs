@@ -11,17 +11,19 @@ public class PlayerSpawner : MonoBehaviour
 
 
    
-    void Start()
-    {
-        Vector3 direction = (Camera.main.transform.forward - Camera.main.transform.position).normalized;
-        direction.x = 0f;
-        direction.z = 0f;
-        Quaternion rotation = Quaternion.Euler(direction);
+   void Start()
+{
+    Vector3 lookDir = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z);
+    Quaternion rotation = Quaternion.Euler(lookDir);
 
-        Instantiate(player, startingNode.transform.position, rotation);
-        player.currentNode = startingNode;
-        
-       player.allEnemies = FindObjectsOfType<EnemyControl>();
-       GameManager.I.enemyNum = player.allEnemies.Length;
-    }
+    PlayerControl spawnedPlayer = Instantiate(player, startingNode.transform.position, rotation);
+    spawnedPlayer.transform.LookAt(lookDir);
+
+    spawnedPlayer.currentNode = startingNode;
+    spawnedPlayer.allEnemies = FindObjectsOfType<EnemyControl>();   // 처치할 적 
+    GameManager.I.enemyNum = spawnedPlayer.allEnemies.Length;
+
+    // 직접 초기화 호출
+    spawnedPlayer.InitializeArrowIndicators();
+}
 }

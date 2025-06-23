@@ -12,12 +12,14 @@ public class PlayerControl : MonoBehaviour
     [Title("MoveSign to Connected Node")]
     [SerializeField] private GameObject moveSign;        // 움직일 수 있는 곳 화살표 프리팹
 
+    [HorizontalLine("Readonly for Debugging", color: FixedColor.Gray), HideField] public bool _l0;
     [Title("Targets")]
     [ReadOnly] public EnemyControl[] allEnemies;
     // public Item[] allItems;
 
     [Title("Now You Are Here")]
     [ReadOnly] public Node currentNode; // 현재 위치한 노드
+    [HorizontalLine(color: FixedColor.Gray), HideField] public bool _l1;
 
     [HideInInspector] public Animator animator;
 
@@ -37,26 +39,11 @@ public class PlayerControl : MonoBehaviour
             Debug.LogWarning("CharacterControl ] Animator 없음");
     }
 
-    void Start()
-    {
-        // 움직일 수 있는 곳 표시용 화살표 소환
-        if (moveSign == null)
-        {
-            Debug.Log("moveSign Missing");
-            return;
-        }
-        for (int i = 0; i < 4; i++)
-        {
-            GameObject arrow = Instantiate(moveSign, transform.position, Quaternion.identity, transform);
-            arrow.SetActive(false); // 비활성화 상태로 시작
-            arrowPool.Add(arrow);
-        }
-        UpdateArrowIndicators();
-    }
 
     void Update()
     {
         if (GameManager.I.isGameStart == false || GameManager.I.isGameover == true) return; //  시작전, 게임오버면 return
+
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // mouse Point to Ray
         RaycastHit hit;
@@ -77,7 +64,7 @@ public class PlayerControl : MonoBehaviour
             OnMouseButtenUp();
         }
     }
-#region  Input
+    #region  Input
     void OnMouseButtenDown()
     {
         transform.position += Vector3.up * 0.2f; // Mouse Clicked feedback
@@ -118,9 +105,9 @@ public class PlayerControl : MonoBehaviour
 
         isDragging = false;
     }
-#endregion
+    #endregion
 
-    void MoveTo(Node targetNode) 
+    void MoveTo(Node targetNode)
     {
         if (targetNode != null)
         {
@@ -162,7 +149,7 @@ public class PlayerControl : MonoBehaviour
 
         // 골 확인
         if (currentNode.isGoalNode)
-            ClearStage();
+            ClearLevel();
     }
 
 
@@ -171,13 +158,14 @@ public class PlayerControl : MonoBehaviour
         EnemyControl[] enemies = FindObjectsOfType<EnemyControl>();
         foreach (var enemy in enemies)
         {
-            if (enemy.currentNode == node)
+            if (enemy.currentNode == node && enemy.isDead == false)
             {
                 isKilldZone = false;
                 return enemy;
             }
-            if (enemy.nextNode == node)
+            if (enemy.nextNode == node && enemy.isDead == false)
             {
+                enemy.isStatic = false;
                 isKilldZone = true;
                 return enemy;
             }
@@ -186,9 +174,29 @@ public class PlayerControl : MonoBehaviour
         return null;
     }
 
-    #region Movement
+
+    #region Indicator
+    public void InitializeArrowIndicators()
+    {
+        if (moveSign == null)
+        {
+            Debug.Log("moveSign Missing");
+            return;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject arrow = Instantiate(moveSign, transform.position, Quaternion.identity, transform);
+            arrow.SetActive(false);
+            arrowPool.Add(arrow);
+        }
+
+        UpdateArrowIndicators();
+    }
     public void UpdateArrowIndicators()
     {
+        Vector3 lookDir = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z);    // 카메라를 바라봐~
+        transform.LookAt(lookDir);
         // 연결 노드 방향으로 화살표 세팅
         int arrowIndex = 0;
 
@@ -207,7 +215,8 @@ public class PlayerControl : MonoBehaviour
             arrowIndex++;
         }
     }
-
+    #endregion
+    #region Movement
     Node MoveToDirection(Vector3 dragDirection) // 카메라 기준으로 동서남북 설정
     {
         Vector3 camForward = mainCamera.transform.forward;
@@ -313,23 +322,31 @@ public class PlayerControl : MonoBehaviour
     #endregion
 
 
-    void CollectItem()
+    void CollectItem()  // 아이템 획득 코드
     {
-        /* 아이템 획득 코드 */
+
     }
-    void Hide()
+    void Hide()     // 은신 처리
     {
-        /* 은신 처리 */
+
     }
-    void Die() // 사망처리
+    void Die()  // 사망처리
     {
-        
         AnimateBool(AnmimatorHashes._KILLED, true, AnmimatorHashes._KILLANIMATION, 3, true);
+
+        if (arrowPool != null)  // 인디케이터 끄기
+            foreach (var arrow in arrowPool)
+            {
+                arrow.SetActive(false);
+            }
+
         GameManager.I.isGameover = true;
+        Debug.Log("Game Over!!");
     }
-    void ClearStage()
+    void ClearLevel()   // 클리어 처리
     {
-        /* 클리어 처리 */
+
+        Debug.Log("Game Clear!!");
     }
 
 

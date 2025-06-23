@@ -28,38 +28,40 @@ public class UIManager : BehaviourSingleton<UIManager>
     {
         SetUI();
 
-
-
-
     }
 
     void SetUI()
     {
+         StartCoroutine(FadeFeedback());
         SFXOn(true);
         BGMOn(true);
     }
 
 
-#region button Click Event
+    #region button Click Event
 
     public void OnClickedGo()
     {
-        StartCoroutine(ShowOnly(chapterSelectPanel));
+        if (chapterSelectPanel != null)
+            StartCoroutine(ShowOnly(chapterSelectPanel));
     }
     public void OnClickedBack2Main()
     {
-        StartCoroutine(ShowOnly(mainPanel));
+        if (mainPanel != null)
+            StartCoroutine(ShowOnly(mainPanel));
     }
     public void OnClickedExit()
     {
-        StartCoroutine(ShowOnly(quitPanel));
+        if (quitPanel != null)
+            StartCoroutine(ShowOnly(quitPanel));
     }
     public void OnClickedSettings()
     {
-        StartCoroutine(ShowOnly(settingsPanel));
+        if (settingsPanel != null)
+            StartCoroutine(ShowOnly(settingsPanel));
     }
-    
-    
+
+
     public void OnClickedQuitGame()
     {
         Application.Quit();
@@ -79,24 +81,31 @@ public class UIManager : BehaviourSingleton<UIManager>
     }
 
 
-    IEnumerator ShowOnly(GameObject target)
+    IEnumerator ShowOnly(GameObject target) // fade Effect Coroutine
     {
-        fadeEffect.SetActive(true);
+
+        StartCoroutine(FadeFeedback());
 
         yield return new WaitForSeconds(0.5f);
-        mainPanel.SetActive(false);
-        settingsPanel.SetActive(false);
-        chapterSelectPanel.SetActive(false);
-        quitPanel.SetActive(false);
+        mainPanel?.SetActive(false);
+        settingsPanel?.SetActive(false);
+        chapterSelectPanel?.SetActive(false);
+        quitPanel?.SetActive(false);
         //resetGamePanel.SetActive(false);
 
         if (target != null)
-            target.SetActive(true);
+            target?.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
-        fadeEffect.SetActive(false);
+      
 
     }
+    IEnumerator FadeFeedback()
+    {
+         fadeEffect.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+         fadeEffect.SetActive(false);
+    }
+
 
    
     bool _s = true;

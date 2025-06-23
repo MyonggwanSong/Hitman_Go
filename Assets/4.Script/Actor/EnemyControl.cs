@@ -7,69 +7,68 @@ public class EnemyControl : MonoBehaviour
 {
     [Title("Movement Attribute")]
     public float moveSpeed = 5f;
+
+    [HorizontalLine("Readonly for Debugging",color:FixedColor.Gray), HideField] public bool _l0;
     [Title("Mesh index")]
-    [SerializeField] int mesheIndex;
+    [ReadOnly] public int mesheIndex;
 
     [Title("Position states")]
-    public Node currentNode = null;
-    public Node nextNode;   // 다음 노드
-    public List<Node> aiRouteNodes = new List<Node>();  // AI 경로의 노드들
+    [ReadOnly]public Node currentNode = null;
+    [ReadOnly] public Node nextNode;   // 다음 노드
+    [ReadOnly] public bool isStatic;
+    [ReadOnly] public bool isDead = false;
+    [ReadOnly] public List<Node> aiRouteNodes = new List<Node>();  // AI 경로의 노드들
 
 
     [Title("AI Route target node")]
-    [ReadOnly]public Node targetNode;
+    public Node targetNode;
 
-    [ReadOnly]public bool isLookingPlayer; // 플레이어 쳐다보는 중
+    [Title("Tomb")]
+    [ReadOnly]public Transform deathZone;
+    [HorizontalLine(color:FixedColor.Gray), HideField] public bool _l1;
 
-    public Transform deathZone;
-
-
-    private bool isdead = false;
     private Coroutine _co = null;
-    private MeshRenderer[] meshes;
+    private Transform meshRoot;
+    // [SerializeField]private MeshRenderer[] meshes;
     [HideInInspector] public Animator animator;
 
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();      // animation casing
         if (animator == null)
-            Debug.LogWarning("CharacterControl ] Animator 없음");
-        meshes = GetComponentsInChildren<MeshRenderer>();
-        if (meshes == null)
-            Debug.LogWarning("meshe 없음");
+            Debug.LogWarning("EnemyControl ] Animator 없음");
 
+        meshRoot = NewBaseType.FindSlot(transform, "Mesh");
+        if (meshRoot == null)
+            Debug.LogWarning("EnemyControl ] MeshRoot 없음");
 
-    }
+        MeshRenderer[] foundMeshes = meshRoot.GetComponentsInChildren<MeshRenderer>();
+        if (foundMeshes == null || foundMeshes.Length == 0)
+            Debug.LogWarning("MeshRoot ] meshe 없음");
 
-    IEnumerator Start()
-    {
-        yield return new WaitUntil(() => currentNode != null);
-        SetInitializing();
-
-        Vector3 lookDir = new Vector3(nextNode.transform.position.x, transform.position.y, nextNode.transform.position.z);
-        transform.LookAt(lookDir);
-
-    }
-
-
-
-    void SetInitializing()
-    {
-        aiRouteNodes = AStarSearch.FindPath(currentNode, targetNode);
-        nextNode = aiRouteNodes[1];
-
-
-        foreach (var m in meshes)
+        foreach (var m in foundMeshes)
             m.gameObject.SetActive(false);
 
-        meshes[mesheIndex].gameObject.SetActive(true);
+        foundMeshes[mesheIndex].gameObject.SetActive(true);
+
 
 
     }
+
+
+    public void SetInitializing() // A* 경로 세팅
+    {
+        aiRouteNodes = AStarSearch.FindPath(currentNode, targetNode);
+        if (aiRouteNodes.Count > 1)
+            nextNode = aiRouteNodes[1];
+        else
+            Debug.LogWarning("A* 경로 생성 실패");
+    }
+
     public void OnTurnChanged(uint newTurn)
     {
         // 턴 넘어갔을 때 AI 동작
-        if (isdead) return;
+        if (isDead) return;
 
         AiMove();
 
@@ -78,6 +77,7 @@ public class EnemyControl : MonoBehaviour
     int _i = 2;
     void AiMove()
     {
+        if (isStatic) return;
         if (currentNode.connectedNodes == null || currentNode.connectedNodes.Count == 0)
         {
             Debug.LogWarning("No connected nodes to move.");
@@ -114,21 +114,15 @@ public class EnemyControl : MonoBehaviour
     }
 
 
-    public bool CanSeePlayer(PlayerControl player)
-    {
-        if (player.currentNode == nextNode)
-            isLookingPlayer = true;
-        return isLookingPlayer; // 간단 예시
-    }
-
     public void Kill()
     {
-        if (isdead) return;
+        if (isDead) return;
 
         Debug.Log("적 처치됨!");
-        StopCoroutine(_co);
+        if(_co != null)
+            StopCoroutine(_co);
         AnimateBool(AnmimatorHashes._KILLED, true, AnmimatorHashes._KILLANIMATION, 3, false);
-        isdead = true;
+        isDead = true;
         GameManager.I.killedEnemyNum++;
     }
 

@@ -14,10 +14,10 @@ public class DrawLine : MonoBehaviour
     {
         nodeManager = GetComponentInParent<NodeManager>();
         if (nodeManager == null)
-            Debug.LogError("NodeManager is missing :" + gameObject.name);
+            Debug.LogError("NodeManager is missing :");
         node = GetComponent<Node>();
         if (node == null)
-            Debug.LogError("Node Component is missing :" + gameObject.name);
+            Debug.LogError("Node Component is missing ");
 
 
     }
@@ -36,9 +36,9 @@ public class DrawLine : MonoBehaviour
 
             LineRenderer lr = lrObj.AddComponent<LineRenderer>();
             lrObj.transform.rotation = Quaternion.Euler(90, 0, 0);
-            lr.alignment = LineAlignment.TransformZ;
-            lr.material = lineMaterial != null ? lineMaterial : new Material(Shader.Find("Sprites/Default"));
-            lr.startWidth = nodeManager.drawLineThickness;
+            lr.alignment = LineAlignment.TransformZ;    // 카메라 따라다니지 않게 눕히기
+            lr.material = lineMaterial != null ? lineMaterial : new Material(Shader.Find("Sprites/Default"));   // 머테리얼 없으면 디폴트 머테리얼 찾아서 넣기
+            lr.startWidth = nodeManager.drawLineThickness; 
             lr.endWidth = nodeManager.drawLineThickness;
             lr.positionCount = 0;
 
@@ -90,7 +90,7 @@ public class DrawLine : MonoBehaviour
 
         lr.SetPosition(1, endPoint);
         // 노드 켜주기
-        targetNode.gameObject.SetActive(true);
+        targetNode.mesh.gameObject.SetActive(true);
         // 그렸다고 표시
         targetNode.isLineDrawn = true;
 

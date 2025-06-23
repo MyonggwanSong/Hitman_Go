@@ -193,6 +193,8 @@ MonoBehaviour:
   TargetNode: {fileID: 1869670924}
   deathZone: {fileID: 632952303}
   Enemy: {fileID: 3679714934949201246, guid: eba8d719741552b4988cc6f12fb94017, type: 3}
+  isStatic: 0
+  mesheIndex: 0
 --- !u!4 &147318112
 Transform:
   m_ObjectHideFlags: 0
@@ -564,75 +566,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664024203}
   m_Mesh: {fileID: 4300000, guid: 5a072050d3a771c4898c8f3307cc06e6, type: 2}
---- !u!1001 &774777510
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 172717958256064068, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: SpawnNode
-      value: 
-      objectReference: {fileID: 880128939}
-    - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: deathZone
-      value: 
-      objectReference: {fileID: 632952303}
-    - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: TargetNode
-      value: 
-      objectReference: {fileID: 1368559932}
-    - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
-      propertyPath: m_Name
-      value: EnemySpawner
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
 --- !u!114 &880128939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6016339630224856658, guid: 74f9e57115b110740ab7261754d10bc2, type: 3}
@@ -1494,6 +1427,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900048207}
   m_Mesh: {fileID: 4300000, guid: 243f922d6eaca8d4a94594eb6fe2ae69, type: 2}
+--- !u!4 &172717957816835298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088755083587164263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &328324563734874394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1642,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c25a16845c43a9458a7ed48a84f4f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2029050864823980506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088755083587164263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7554d6034aa2def449fe93e4862dd230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnNode: {fileID: 880128939}
+  TargetNode: {fileID: 1368559932}
+  deathZone: {fileID: 632952303}
+  Enemy: {fileID: 3679714934949201246, guid: eba8d719741552b4988cc6f12fb94017, type: 3}
+  isStatic: 0
+  mesheIndex: 0
 --- !u!64 &2845472304221950486
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2094,6 +2060,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8088755083587164263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172717957816835298}
+  - component: {fileID: 2029050864823980506}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2103,7 +2086,7 @@ SceneRoots:
   - {fileID: 1304611065}
   - {fileID: 632952303}
   - {fileID: 147318112}
-  - {fileID: 774777510}
+  - {fileID: 172717957816835298}
   - {fileID: 491881361}
   - {fileID: 1869670923}
   - {fileID: 1835336073}

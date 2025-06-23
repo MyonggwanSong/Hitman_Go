@@ -13,7 +13,7 @@ public class GameManager : BehaviourSingleton<GameManager>
     #endregion
 #region Game State
     public bool isGameover = false; // 게임오버
-    public float startDelay = 10f;   // 시작 딜레이
+    public float startDelay = 3f;   // 시작 딜레이
     public bool isGameStart = false;
 
 #endregion
