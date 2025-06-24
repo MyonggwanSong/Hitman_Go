@@ -543,11 +543,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff56ff30b1f30d64690623ab4be7000f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  moveDistance: 5
   moveSpeed: 5
+  patrolEnemy: 0
+  isStatic: 1
+  eventDetect: {fileID: 11400000, guid: 23d07a2ceac54854cb1cee701f01e9e4, type: 2}
+  _l0: 0
+  mesheIndex: 0
   currentNode: {fileID: 0}
   nextNode: {fileID: 0}
+  isDead: 0
   aiRouteNodes: []
-  isLookingPlayer: 0
+  targetNode: {fileID: 0}
+  deathZone: {fileID: 0}
+  _l1: 0
   animator: {fileID: 0}

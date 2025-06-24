@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: isStatic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: SpawnNode
@@ -1684,9 +1684,10 @@ Animation:
   m_GameObject: {fileID: 1132452957}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 60ff966f16623514f94652c942331ba1, type: 2}
+  m_Animation: {fileID: 7400000, guid: f8a6cc7a33424024aabe678c6a6933ed, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 60ff966f16623514f94652c942331ba1, type: 2}
+  - {fileID: 7400000, guid: f8a6cc7a33424024aabe678c6a6933ed, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -2272,7 +2273,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9528302, g: 0.93369985, b: 0.57978815, a: 1}
+  m_Color: {r: 1, g: 0.9940252, b: 0.9103774, a: 1}
   m_Intensity: 1.1
   m_Range: 10
   m_SpotAngle: 30
@@ -2282,7 +2283,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.525
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2

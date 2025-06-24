@@ -266,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 69993266}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: mesheIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: m_Name
@@ -1017,7 +1017,7 @@ PrefabInstance:
       objectReference: {fileID: 661193385}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: mesheIndex
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: m_Name
@@ -1534,7 +1534,7 @@ PrefabInstance:
       objectReference: {fileID: 69993267}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: mesheIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: m_Name
@@ -1773,9 +1773,10 @@ Animation:
   m_GameObject: {fileID: 1132452957}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 60ff966f16623514f94652c942331ba1, type: 2}
+  m_Animation: {fileID: 7400000, guid: f8a6cc7a33424024aabe678c6a6933ed, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 60ff966f16623514f94652c942331ba1, type: 2}
+  - {fileID: 7400000, guid: f8a6cc7a33424024aabe678c6a6933ed, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -1903,7 +1904,7 @@ PrefabInstance:
       objectReference: {fileID: 69993265}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: mesheIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: m_Name
@@ -2256,7 +2257,6 @@ GameObject:
   - component: {fileID: 1511175460}
   - component: {fileID: 1511175461}
   - component: {fileID: 1511175462}
-  - component: {fileID: 1511175463}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2410,22 +2410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7185b01d0394f44bd24be1c9b16b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1511175463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511175456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1fcef3c0b803d7469c3f002785c7b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 883707783}
-  distance: 10
-  orbitSpeed: 5
-  smoothTime: 0.2
 --- !u!1 &1519120506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,7 +2439,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9528302, g: 0.93369985, b: 0.57978815, a: 1}
+  m_Color: {r: 1, g: 0.9918763, b: 0.8537736, a: 1}
   m_Intensity: 1.1
   m_Range: 10
   m_SpotAngle: 30
@@ -2465,7 +2449,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.472
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -2610,7 +2594,7 @@ PrefabInstance:
       objectReference: {fileID: 69993263}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: mesheIndex
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: m_Name
@@ -2687,7 +2671,7 @@ PrefabInstance:
       objectReference: {fileID: 69993266}
     - target: {fileID: 2029050865195055996, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: mesheIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8088755083018711745, guid: a5ab6e3fd90417d419f33efcec94b3f0, type: 3}
       propertyPath: m_Name

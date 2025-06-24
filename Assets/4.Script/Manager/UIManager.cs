@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using CustomInspector;
+using UnityEngine.SceneManagement;
 
 public class UIManager : BehaviourSingleton<UIManager>
 {
@@ -14,6 +15,8 @@ public class UIManager : BehaviourSingleton<UIManager>
     public GameObject chapterSelectPanel;
     public GameObject settingsPanel;
     public GameObject quitPanel;
+    public GameObject chapter1Map;
+
     //public GameObject resetGamePanel;
 
     // Effect
@@ -32,7 +35,7 @@ public class UIManager : BehaviourSingleton<UIManager>
 
     void SetUI()
     {
-         StartCoroutine(FadeFeedback());
+        StartCoroutine(FadeFeedback());
         SFXOn(true);
         BGMOn(true);
     }
@@ -96,18 +99,18 @@ public class UIManager : BehaviourSingleton<UIManager>
         if (target != null)
             target?.SetActive(true);
 
-      
+
 
     }
     IEnumerator FadeFeedback()
     {
-         fadeEffect.SetActive(true);
+        fadeEffect.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-         fadeEffect.SetActive(false);
+        fadeEffect.SetActive(false);
     }
 
 
-   
+
     bool _s = true;
 
     public void SFXOn(bool on)
@@ -145,6 +148,11 @@ public class UIManager : BehaviourSingleton<UIManager>
             // connect Audio Manager
 
         }
+    }
+
+    public void OnSceneLoad(int i)
+    {
+        SceneManager.LoadScene(i);
     }
 
 

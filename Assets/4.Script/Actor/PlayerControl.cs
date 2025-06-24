@@ -19,6 +19,10 @@ public class PlayerControl : MonoBehaviour
 
     [Title("Now You Are Here")]
     [ReadOnly] public Node currentNode; // 현재 위치한 노드
+    [Title("You have this Items")]
+    [ReadOnly] public Item hasItem;    // 가지고 있는 아이템
+
+
     [HorizontalLine(color: FixedColor.Gray), HideField] public bool _l1;
 
     [HideInInspector] public Animator animator;
@@ -52,9 +56,28 @@ public class PlayerControl : MonoBehaviour
         {
             if (hit.collider != null && hit.collider.tag == "Player")
             {
-                if (Input.GetMouseButtonDown(0) && !isMoving)
+                if (Input.GetMouseButtonDown(0) && !isMoving && hasItem == null)
                 {
                     OnMouseButtenDown();
+                }
+            }
+            if (hit.collider != null && hit.collider.tag == "Indicator_Targetable")
+            {
+                if (Input.GetMouseButtonDown(0) && !isMoving && hasItem != null)
+                {
+                    Collider[] cols = Physics.OverlapSphere(hit.collider.transform.position, 0.5f); // 인디케이터와 0.5거리의 노드들을 찾아서 캐싱
+                    List<Node> detectedNodes = new List<Node>();
+                    foreach (Collider c in cols)
+                    {
+                        if (c.tag != "Node") continue;
+Debug.Log($"{c.name}");
+                        Node targetnode = c.GetComponentInParent<Node>();
+                        detectedNodes.Add(targetnode);
+
+                    }
+Debug.Log($"{detectedNodes[0].name}");
+
+                    Throwing(detectedNodes[0]);
                 }
             }
         }
@@ -137,15 +160,8 @@ public class PlayerControl : MonoBehaviour
         }
 
         // 적 유무 검사
-        bool _isKilledZone;
-        EnemyControl enemy = FindEnemyOnNode(currentNode, out _isKilledZone);
-        if (enemy != null)
-        {
-            if (_isKilledZone == false) // 적을 죽일 수 있는 노드
-                enemy.Kill();
-            else                    // 적이 날 죽일 수 있는 노드
-                Die();
-        }
+        FindEnemyOnNode(currentNode);
+
 
         // 골 확인
         if (currentNode.isGoalNode)
@@ -153,25 +169,21 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-    EnemyControl FindEnemyOnNode(Node node, out bool isKilldZone)  // boo
+    void FindEnemyOnNode(Node node)  // boo
     {
         EnemyControl[] enemies = FindObjectsOfType<EnemyControl>();
         foreach (var enemy in enemies)
         {
             if (enemy.currentNode == node && enemy.isDead == false)
             {
-                isKilldZone = false;
-                return enemy;
+                enemy.Kill();
             }
             if (enemy.nextNode == node && enemy.isDead == false)
             {
                 enemy.isStatic = false;
-                isKilldZone = true;
-                return enemy;
+                Die();
             }
         }
-        isKilldZone = false;
-        return null;
     }
 
 
@@ -280,10 +292,9 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator MoveToPosition(Vector3 targetPos)
     {
-        // 기존 화살표 꺼주기
         if (currentNode == null)
         {
-            Debug.LogWarning("currentNode 없음 - 화살표 갱신 취소");
+            Debug.Log("currentNode 없음, 화살표 갱신 불가");
 
         }
         else
@@ -324,7 +335,24 @@ public class PlayerControl : MonoBehaviour
 
     void CollectItem()  // 아이템 획득 코드
     {
+         if (currentNode != null)
+            foreach (var arrow in arrowPool)
+            {
+                arrow.SetActive(false);
+            }
+        //애니매이션, mesh 교체
+    }
 
+    public void Throwing(Node target)
+    {
+        if (hasItem == null) return;
+
+        hasItem.targetNode = target;
+        StartCoroutine(hasItem.ParabolaMoveCoroutine());
+        hasItem = null;
+
+        if (currentNode != null)
+            UpdateArrowIndicators();
     }
     void Hide()     // 은신 처리
     {

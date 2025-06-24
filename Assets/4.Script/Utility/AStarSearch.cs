@@ -3,12 +3,12 @@ using UnityEngine;
 
 public static class AStarSearch
 {
-// 1. start를 openSet에 넣음.
-// 2. openSet에서 가장 예상 비용(fScore) 낮은 노드 꺼냄.
-// 3. 이웃 노드들 전부 검사 :
-//    >> 이미 갔다면 패스.
-//    >> 더 좋은 길이면 openSet에 추가 + 정보 갱신.
-// 4. goal 만나면 경로 복원.
+    // 1. start를 openSet에 넣음
+    // 2. openSet에서 가장 예상 비용(fScore) 낮은 노드 꺼냄
+    // 3. 이웃 노드들 전부 검사
+    //    >> 이미 갔다면 패스
+    //    >> 더 좋은 길이면 openSet에 추가 + 정보 갱신
+    // 4. goal 만나면 경로 복원
 
     public static List<Node> FindPath(Node start, Node goal)
     {
@@ -92,4 +92,68 @@ public static class AStarSearch
         }
         return totalPath;
     }
+
+public static Node FindFarthestNode(Node current, Vector3 forward)  // 바라보는 방향 우선. 없으면 반대 방향
+{
+    if (current == null)
+    {
+        Debug.LogError("FindFarthestNode: current node is null.");
+        return null;
+    }
+
+    Node forwardLastNode = FindStraightLastNode(current, forward, 0.7f); // 전방 우선 (45도)
+    
+    // 전방 없으면 후방 방향 탐색
+    if (forwardLastNode != null)
+        return forwardLastNode;
+
+    // 후방으로 진행 (180도 뒤로)
+    Vector3 backward = -forward;
+    Node backwardLastNode = FindStraightLastNode(current, backward, 0.7f);
+
+    return backwardLastNode;
+}
+
+// 실제 직선 방향 끝까지 탐색하는 함수
+private static Node FindStraightLastNode(Node startNode, Vector3 direction, float dotThreshold) // 직선거리의 가장 멀리있는 노드 찾기
+{
+    Node currentNode = startNode;
+    Node lastNode = startNode;
+    Node prevNode = null;
+
+    while (true)
+    {
+        Node nextNode = null;
+        float maxDot = dotThreshold;
+
+        foreach (Node neighbor in currentNode.connectedNodes)
+        {
+            if (neighbor == prevNode) continue; // 방금 온 노드는 제외
+
+            Vector3 dirToNeighbor = (neighbor.transform.position - currentNode.transform.position).normalized;
+            float dot = Vector3.Dot(direction.normalized, dirToNeighbor);
+
+            if (dot > maxDot)
+            {
+                maxDot = dot;
+                nextNode = neighbor;
+            }
+        }
+
+        if (nextNode != null)
+        {
+            prevNode = currentNode;
+            currentNode = nextNode;
+            lastNode = currentNode;
+        }
+        else
+        {
+            break; // 더 갈 노드 없음
+        }
+    }
+
+    return lastNode != startNode ? lastNode : null; // 출발 노드랑 같으면 null 반환
+}
+
+
 }

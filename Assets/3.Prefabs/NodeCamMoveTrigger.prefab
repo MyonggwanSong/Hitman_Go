@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2974515098197920480}
   - component: {fileID: 4310653804400096279}
   - component: {fileID: 246433293423188071}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NodeCamMoveTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

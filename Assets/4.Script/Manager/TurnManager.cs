@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class TurnManager : BehaviourSingleton<TurnManager>
 {
     protected override bool IsDontdestroy() => false;
@@ -15,14 +13,14 @@ public class TurnManager : BehaviourSingleton<TurnManager>
         previousTurn = currentTurn;
     }
 
-   private void NotifyEnemies()
-{
-    var enemies = FindObjectsOfType<EnemyControl>(true);
-
-    foreach (var enemy in enemies)
+    private void NotifyEnemies()
     {
-        enemy.OnTurnChanged(currentTurn);
-    }
+        var enemies = FindObjectsOfType<EnemyControl>(true);
 
-}
+        foreach (var enemy in enemies)
+        {
+            enemy.OnTurnChanged(currentTurn);
+        }
+
+    }
 }

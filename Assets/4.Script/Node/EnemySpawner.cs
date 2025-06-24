@@ -14,8 +14,8 @@ public class EnemySpawner : MonoBehaviour
 
     [Title("Enmey Prefab")]
     [SerializeField] EnemyControl Enemy;
-    [SerializeField] bool isStatic;
     [SerializeField] int mesheIndex;
+    
     void Start()
     {
         EnemyControl spawnedEnemy = Instantiate(Enemy, SpawnNode.transform.position, transform.rotation);
@@ -32,12 +32,9 @@ public class EnemySpawner : MonoBehaviour
          Vector3 lookDir = new Vector3(clone.targetNode.transform.position.x, transform.position.y, clone.targetNode.transform.position.z);
         clone.transform.LookAt(lookDir);
 
-
         clone.deathZone = deathZone;
-        clone.isStatic = isStatic;
         clone.mesheIndex = mesheIndex;
-      
 
-        clone.SetInitializing();
+        clone.SetInitial();
     }
 }

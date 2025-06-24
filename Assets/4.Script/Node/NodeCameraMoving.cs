@@ -16,7 +16,6 @@ public class NodeCameraMoving : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("들어옴");
             previousCamPos = Camera.main.transform.position;
             previousCamRot = Camera.main.transform.rotation;
             _co = StartCoroutine(Camera.main.GetComponent<CameraMove>().MoveCamera(cameraMove2, Quaternion.Euler(cameraRotate2), duration));
