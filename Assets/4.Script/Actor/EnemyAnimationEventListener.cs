@@ -33,7 +33,7 @@ public class EnemyAnimationEventListener : MonoBehaviour
         {
             owner.animator.SetBool(AnmimatorHashes._KILLED, false);
 
-            owner.transform.position = owner.deathZone.position + new Vector3(-GameManager.I.killedEnemyNum*0.8f,0f,0f); // 죽었을때 떨어지는 위치
+            owner.transform.position = owner.deathZone.position + new Vector3(-GameManager.I.killedEnemyNum*2f,0f,0f); // 죽었을때 떨어지는 위치
             owner.AnimateBool(AnmimatorHashes._FALLDOWN, true, AnmimatorHashes._KILLANIMATION, 3, false);
         }
     }

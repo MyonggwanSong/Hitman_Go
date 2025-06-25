@@ -27,10 +27,14 @@ public class EnemySpawner : MonoBehaviour
     void SetInitialEnemy(EnemyControl clone)
     {
         clone.currentNode = SpawnNode;
-        clone.targetNode = TargetNode;
+        if (TargetNode != null)
+        {
+            clone.targetNode = TargetNode;
 
-         Vector3 lookDir = new Vector3(clone.targetNode.transform.position.x, transform.position.y, clone.targetNode.transform.position.z);
-        clone.transform.LookAt(lookDir);
+            Vector3 lookDir = new Vector3(clone.targetNode.transform.position.x, transform.position.y, clone.targetNode.transform.position.z);
+            clone.transform.LookAt(lookDir);
+        }
+        
 
         clone.deathZone = deathZone;
         clone.mesheIndex = mesheIndex;

@@ -93,26 +93,46 @@ public static class AStarSearch
         return totalPath;
     }
 
-public static Node FindFarthestNode(Node current, Vector3 forward)  // 바라보는 방향 우선. 없으면 반대 방향
+public static Node FindForwardNode(Node current, Vector3 forward)
 {
-    if (current == null)
+    Node forwardNode = null;
+    float bestDot = 0.7f; // 기준: 정면 45도 이상만 허용
+
+    foreach (Node neighbor in current.connectedNodes)
     {
-        Debug.LogError("FindFarthestNode: current node is null.");
-        return null;
+        Vector3 dirToNeighbor = (neighbor.transform.position - current.transform.position).normalized;
+        float dot = Vector3.Dot(forward.normalized, dirToNeighbor);
+
+        if (dot > bestDot)
+        {
+            bestDot = dot;
+            forwardNode = neighbor;
+        }
     }
 
-    Node forwardLastNode = FindStraightLastNode(current, forward, 0.7f); // 전방 우선 (45도)
-    
-    // 전방 없으면 후방 방향 탐색
-    if (forwardLastNode != null)
-        return forwardLastNode;
-
-    // 후방으로 진행 (180도 뒤로)
-    Vector3 backward = -forward;
-    Node backwardLastNode = FindStraightLastNode(current, backward, 0.7f);
-
-    return backwardLastNode;
+    return forwardNode;
 }
+
+    public static Node FindFarthestNode(Node current, Vector3 forward)  // 바라보는 방향 우선. 없으면 반대 방향
+    {
+        if (current == null)
+        {
+            Debug.LogError("FindFarthestNode: current node is null.");
+            return null;
+        }
+
+        Node forwardLastNode = FindStraightLastNode(current, forward, 0.7f); // 전방 우선 (45도)
+
+        // 전방 탐색
+        if (forwardLastNode != null)
+            return forwardLastNode;
+
+        // 후방으로 진행 
+        Vector3 backward = -forward;
+        Node backwardLastNode = FindStraightLastNode(current, backward, 0.7f);
+
+        return backwardLastNode;
+    }
 
 // 실제 직선 방향 끝까지 탐색하는 함수
 private static Node FindStraightLastNode(Node startNode, Vector3 direction, float dotThreshold) // 직선거리의 가장 멀리있는 노드 찾기

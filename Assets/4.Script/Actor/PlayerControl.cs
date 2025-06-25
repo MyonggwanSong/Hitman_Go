@@ -31,8 +31,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 dragStartPos;   // 마우스 클릭위치
     private Vector3 dragEndPos;     // 마우스 땐 위치
     private bool isDragging = false;    // 마우스 클릭 중
-    private Node targetNode; // 움직일 다음 노드
-
+  
     private bool isMoving = false;
 
     void Awake()
@@ -70,12 +69,10 @@ public class PlayerControl : MonoBehaviour
                     foreach (Collider c in cols)
                     {
                         if (c.tag != "Node") continue;
-Debug.Log($"{c.name}");
                         Node targetnode = c.GetComponentInParent<Node>();
                         detectedNodes.Add(targetnode);
 
                     }
-Debug.Log($"{detectedNodes[0].name}");
 
                     Throwing(detectedNodes[0]);
                 }
@@ -165,11 +162,14 @@ Debug.Log($"{detectedNodes[0].name}");
 
         // 골 확인
         if (currentNode.isGoalNode)
-            ClearLevel();
+        {
+            GameManager.I.isGameStart = false;
+           StartCoroutine(ClearLevel());
+        }
     }
 
 
-    void FindEnemyOnNode(Node node)  // boo
+    void FindEnemyOnNode(Node node) 
     {
         EnemyControl[] enemies = FindObjectsOfType<EnemyControl>();
         foreach (var enemy in enemies)
@@ -332,7 +332,7 @@ Debug.Log($"{detectedNodes[0].name}");
     }
     #endregion
 
-
+#region Activate
     void CollectItem()  // 아이템 획득 코드
     {
          if (currentNode != null)
@@ -358,7 +358,7 @@ Debug.Log($"{detectedNodes[0].name}");
     {
 
     }
-    void Die()  // 사망처리
+    public void Die()  // 사망처리
     {
         AnimateBool(AnmimatorHashes._KILLED, true, AnmimatorHashes._KILLANIMATION, 3, true);
 
@@ -371,12 +371,28 @@ Debug.Log($"{detectedNodes[0].name}");
         GameManager.I.isGameover = true;
         Debug.Log("Game Over!!");
     }
-    void ClearLevel()   // 클리어 처리
+    IEnumerator ClearLevel()   // 클리어 처리
     {
+        yield return new WaitUntil(()=> GameManager.I.isGameStart == false);
 
+        AchievementManager.I.SetLevelCleared(GameManager.I.currentLevel);   // Clear Level Save
+        AchievementManager.I.EvaluateAchievements();    // Clear Achievement save
+
+        yield return new WaitForSeconds(1f);
+
+        UIManager.I.OnClearPopup();
+        for (int i = 0; i < UIManager.I.stamps.Count; i++) // 업적에 해당하는 도장 키기
+        {
+            if (AchievementManager.I.IsLevelAchievment(GameManager.I.currentLevel, i + 1))
+            {
+                
+                UIManager.I.stamps[i].SetActive(true);
+            }
+        }
         Debug.Log("Game Clear!!");
     }
 
+    #endregion
 
 
     #region Animation

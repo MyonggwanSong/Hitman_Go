@@ -9,16 +9,22 @@ public class EnemyControl : MonoBehaviour
     [Title("Movement Attribute")]
     [SerializeField] float moveSpeed = 5f;
 
+    [Title("State PopupLabel prefab")]
+    [SerializeField] GameObject detectPopupLabel;
+
 
     [Title("Patrol Guard")]
     [SerializeField] bool patrolEnemy = false;
-    
+
     [Title("Standing Guard")]
     [SerializeField] public bool isStatic;
 
+    [Title("Target")]
+    [SerializeField] public bool isTarget;
+
     [Title("Receive Events")]
     [SerializeField] EventDetect eventDetect;
-    
+
 
     [HorizontalLine("Readonly for Debugging", color: FixedColor.Gray), HideField] public bool _l0;
     [Title("Mesh index")]
@@ -29,6 +35,7 @@ public class EnemyControl : MonoBehaviour
     [ReadOnly] public Node nextNode;   // 다음 노드
 
     [ReadOnly] public bool isDead = false;
+
     [ReadOnly] public List<Node> aiRouteNodes = new List<Node>();  // AI 경로의 노드들
 
 
@@ -50,11 +57,11 @@ public class EnemyControl : MonoBehaviour
         if (animator == null)
             Debug.LogWarning("EnemyControl ] Animator 없음");
 
-        meshRoot = NewBaseType.FindSlot(transform, "Mesh");
+        meshRoot = NewBaseType.FindSlot(transform, "Mesh"); // 가까운데에서 찾기위한 슬롯 캐싱
         if (meshRoot == null)
             Debug.LogWarning("EnemyControl ] MeshRoot 없음");
 
-        foundMeshes = meshRoot.GetComponentsInChildren<MeshRenderer>();
+        foundMeshes = meshRoot.GetComponentsInChildren<MeshRenderer>(); //  Mesh Casing
         if (foundMeshes == null || foundMeshes.Length == 0)
             Debug.LogWarning("MeshRoot ] meshe 없음");
 
@@ -76,25 +83,32 @@ public class EnemyControl : MonoBehaviour
         foreach (var m in foundMeshes)
             m.gameObject.SetActive(false);
         foundMeshes[mesheIndex].gameObject.SetActive(true);
+
     }
 
+    void Update()
+    {
+        detectPopupLabel.transform.LookAt(Camera.main.transform.position);
 
+    }
     public void SetInitial() // A* 경로 세팅
     {
+        if (targetNode == null) return;
+
         aiRouteNodes = AStarSearch.FindPath(currentNode, targetNode);
 
         if (aiRouteNodes.Count > 1)
         {
             nextNode = aiRouteNodes[1];
             Vector3 lookDir = new Vector3(nextNode.transform.position.x, transform.position.y, nextNode.transform.position.z);
-             transform.LookAt(lookDir);
+            transform.LookAt(lookDir);
         }
         else
         {
             Debug.LogWarning("A* 경로 생성 실패");
             return;
         }
-            
+
     }
 
     public void OnTurnChanged(uint newTurn)
@@ -128,14 +142,25 @@ public class EnemyControl : MonoBehaviour
             _i = 2;
             if (patrolEnemy)    // 순찰하는 적 경로 설정
             {
-                Vector3 _previousDir = aiRouteNodes[aiRouteNodes.Count - 1].transform.position - aiRouteNodes[aiRouteNodes.Count - 2].transform.position;
+                if (detectPopupLabel.activeSelf)
+                    detectPopupLabel.SetActive(false);
+
+                Vector3 _previousDir = (aiRouteNodes[aiRouteNodes.Count - 1].transform.position - aiRouteNodes[aiRouteNodes.Count - 2].transform.position).normalized;
                 targetNode = AStarSearch.FindFarthestNode(currentNode, _previousDir);
-                if (targetNode == null)
-                    return;
-                SetInitial();
+                if (targetNode != null)
+                    SetInitial();
+                if (detectPopupLabel.activeSelf)
+                    detectPopupLabel.SetActive(false);
             }
             else
             {
+                if (detectPopupLabel.activeSelf)
+                    detectPopupLabel.SetActive(false);
+                // 도착해도 공격 할 nextNode Setting
+                Vector3 _previousDir = (aiRouteNodes[aiRouteNodes.Count - 1].transform.position - aiRouteNodes[aiRouteNodes.Count - 2].transform.position).normalized;
+                targetNode = AStarSearch.FindForwardNode(currentNode, _previousDir);
+                if (targetNode != null)
+                    SetInitial();
                 isStatic = true;
             }
         }
@@ -155,7 +180,7 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-
+    #region Acvtivate
     public void Kill()
     {
         if (isDead) return;
@@ -173,7 +198,7 @@ public class EnemyControl : MonoBehaviour
         Vector3 startPos = transform.position;
         float time = 0f;
 
-        // 애니메이ㅣ션
+        // 애니메이션
         AnimateBool(AnmimatorHashes._MOVE, true, AnmimatorHashes._MOVEANIMATION, 5, true);
 
         while (time < 1f)
@@ -187,7 +212,27 @@ public class EnemyControl : MonoBehaviour
         Vector3 lookDir = new Vector3(nextNode.transform.position.x, transform.position.y, nextNode.transform.position.z);
         transform.LookAt(lookDir);
     }
+    #endregion
+    private IEnumerator DetectAnimation()
+    {
+        Vector3 dir = (Camera.main.transform.position - detectPopupLabel.transform.position).normalized;
+        dir.y = 0f;
 
+        detectPopupLabel.SetActive(true);
+
+        Vector3 prePos = detectPopupLabel.transform.position;
+        Vector3 targetPos = prePos + Vector3.down * 0.3f;
+
+        float time = 0f;
+        while (time < 1f)
+        {
+            time += Time.deltaTime;
+            detectPopupLabel.transform.position = Vector3.Lerp(prePos, targetPos, time);
+
+            yield return null;
+        }
+        detectPopupLabel.transform.position = targetPos;
+    }
     #region Animation
     // 애니메이션 해시 코드를 찾아서 파라미터 움직임.
     public void Animate(int hash, float duration)
@@ -222,6 +267,7 @@ public class EnemyControl : MonoBehaviour
             AnimateBool(AnmimatorHashes._INVESTIGATE, true);
             isStatic = false;
             SetInitial();
+            StartCoroutine(DetectAnimation());
         }
     }
 

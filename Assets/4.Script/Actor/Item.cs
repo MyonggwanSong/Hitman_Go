@@ -4,28 +4,40 @@ using UnityEngine;
 using CustomInspector;
 public class Item : MonoBehaviour
 {
-     [Title("Event Connect!!")]
+    [Title("Event Connect!!")]
     [SerializeField] EventDetect eventDetect;
     [ReadOnly] public GameObject indicatorPrefab;
+    [ReadOnly] public GameObject indicatorRangePrefab;
+
     [ReadOnly] public Node[] targetNodes;
     [ReadOnly] public Node targetNode;
     [ReadOnly] public Node currentNode;
+    [ReadOnly] public MeshRenderer[] meshs;
 
 
     private List<GameObject> indicators = new List<GameObject>();
 
-    
+
     public float flightTime = 1f; // 날아가는 전체 시간
     public float height = 2f;     // 포물선 최고 높이
     public bool isTargetItem = false;
 
     private Vector3 startPos;
 
+    void Awake()
+    {
+        meshs = GetComponentsInChildren<MeshRenderer>();
 
-    
+    }
+    void Start()
+    {
+        meshs[0].gameObject.SetActive(false);
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
+        ChangeMesh(true);
         if (other.tag == "Player")
         {
             if (isTargetItem)
@@ -42,6 +54,12 @@ public class Item : MonoBehaviour
         }
     }
 
+    void ChangeMesh(bool b)
+    {
+        meshs[0].gameObject.SetActive(b);
+        meshs[1].gameObject.SetActive(!b);
+    }
+
     public void IsPicked()
     {
 
@@ -49,7 +67,7 @@ public class Item : MonoBehaviour
         {
             indicators.Add(Instantiate(indicatorPrefab, n.transform.position + Vector3.up * 0.02f, Quaternion.Euler(new Vector3(90, 0, 0))));
         }
-        
+
         //return true;
     }
 
@@ -92,13 +110,25 @@ public class Item : MonoBehaviour
         {
             Destroy(i);
         }
+        StartCoroutine(AnimationRangeIndicator());
 
         eventDetect.occuredNode = targetNode;
         eventDetect.Raise();
 
 
         Debug.Log("돌이 목표 지점에 도착!");
-        gameObject.SetActive(false);
+
         // 필요하면 이곳에서 폭발, 적 유도, 사운드 재생 가능
+    }
+
+    public IEnumerator AnimationRangeIndicator()
+    {
+        GameObject clone = Instantiate(indicatorRangePrefab, transform.position, Quaternion.identity, transform);
+        //clone.GetComponent<Animation>().Play("RangeIndicatorAnimation");
+
+        yield return new WaitForSeconds(1f);
+        Destroy(clone);
+        gameObject.SetActive(false);
+        yield return null;
     }
 }

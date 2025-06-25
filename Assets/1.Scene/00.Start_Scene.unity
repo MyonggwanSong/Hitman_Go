@@ -734,7 +734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c78cce91ba3de034cb71564db7b73bb4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08c2eed090ebe9846a8e07a0081fa2c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8300,7 +8300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4bd3e9e9f6748414090fba6d765fdf31, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39724b6805843474cac3c5a16539d7b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15093,7 +15093,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5debc3fc9e3814442af63ac90e68b9e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1811e4f87b956934bb71fa8a5f328106, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15789,7 +15789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6477f5d109c7767418687907203b4136, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09e192a00c03a1f4a833d9bd46e2da83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15972,7 +15972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8086473a98e83fa4f9dc235827518443, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e2703817405c2846bbbfa8b7b27cc90, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16119,7 +16119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2bb6023c71d0bfd4a96488c173b2bfbc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b30536d23b290ea4bb147bef343788fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16334,7 +16334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3252892437431479634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 939897408}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnClickedEnterChpater1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3252892437452276358
 GameObject:
   m_ObjectHideFlags: 0
