@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventDetect: {fileID: 11400000, guid: 23d07a2ceac54854cb1cee701f01e9e4, type: 2}
   indicatorPrefab: {fileID: 0}
+  indicatorRangePrefab: {fileID: 0}
   targetNodes: []
   targetNode: {fileID: 0}
   currentNode: {fileID: 0}
@@ -259,7 +260,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9a88146d153f3924ca9b7a529ae382b0, type: 2}
+  - {fileID: 2100000, guid: a5c9c190e5159b04d864cfbc01cfe32f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -364,7 +365,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 12e7840ec1839c24aa279c5bc04201fb, type: 2}
+  - {fileID: 2100000, guid: a5c9c190e5159b04d864cfbc01cfe32f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

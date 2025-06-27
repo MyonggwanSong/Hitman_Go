@@ -546,8 +546,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   detectPopupLabel: {fileID: 998580756501103109}
+  labelOffsetY: 4
   patrolEnemy: 0
   isStatic: 1
+  isTarget: 0
   eventDetect: {fileID: 11400000, guid: 23d07a2ceac54854cb1cee701f01e9e4, type: 2}
   _l0: 0
   mesheIndex: 0
@@ -573,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 970880160829222826, guid: a73220b22e145364c8060696c17a9085, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.844
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 970880160829222826, guid: a73220b22e145364c8060696c17a9085, type: 3}
       propertyPath: m_LocalPosition.z

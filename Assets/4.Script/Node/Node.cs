@@ -29,9 +29,6 @@ public class Node : MonoBehaviour
             Debug.LogWarning("Node ] mesh 없음");
         mesh.gameObject.SetActive(false);
     }
-
-
-
     void OnValidate()
     {
         meshrenderer = GetComponentInChildren<MeshRenderer>();

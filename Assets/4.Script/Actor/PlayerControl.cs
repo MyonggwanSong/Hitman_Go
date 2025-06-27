@@ -14,8 +14,7 @@ public class PlayerControl : MonoBehaviour
 
     [HorizontalLine("Readonly for Debugging", color: FixedColor.Gray), HideField] public bool _l0;
     [Title("Targets")]
-    [ReadOnly] public EnemyControl[] allEnemies;
-    // public Item[] allItems;
+
 
     [Title("Now You Are Here")]
     [ReadOnly] public Node currentNode; // 현재 위치한 노드
@@ -26,12 +25,12 @@ public class PlayerControl : MonoBehaviour
     [HorizontalLine(color: FixedColor.Gray), HideField] public bool _l1;
 
     [HideInInspector] public Animator animator;
-
+    private EnemyControl[] enemies;
     private List<GameObject> arrowPool = new List<GameObject>();
     private Vector3 dragStartPos;   // 마우스 클릭위치
     private Vector3 dragEndPos;     // 마우스 땐 위치
     private bool isDragging = false;    // 마우스 클릭 중
-  
+
     private bool isMoving = false;
 
     void Awake()
@@ -40,6 +39,13 @@ public class PlayerControl : MonoBehaviour
         animator = GetComponentInChildren<Animator>();  // animation casing
         if (animator == null)
             Debug.LogWarning("CharacterControl ] Animator 없음");
+    }
+    IEnumerator Start()
+    {
+        yield return new WaitUntil(() => GameManager.I.isGameStart);
+
+        enemies = FindObjectsOfType<EnemyControl>();
+        GameManager.I.enemyNum = enemies.Length;
     }
 
 
@@ -53,7 +59,7 @@ public class PlayerControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit)) // 플래이어 클릭 시
         {
-            if (hit.collider != null && hit.collider.tag == "Player")
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 if (Input.GetMouseButtonDown(0) && !isMoving && hasItem == null)
                 {
@@ -68,7 +74,7 @@ public class PlayerControl : MonoBehaviour
                     List<Node> detectedNodes = new List<Node>();
                     foreach (Collider c in cols)
                     {
-                        if (c.tag != "Node") continue;
+                        if (!c.CompareTag("Node")) continue;
                         Node targetnode = c.GetComponentInParent<Node>();
                         detectedNodes.Add(targetnode);
 
@@ -131,9 +137,9 @@ public class PlayerControl : MonoBehaviour
     {
         if (targetNode != null)
         {
-            StartCoroutine(MoveToPosition(targetNode.transform.position));
             currentNode = targetNode;
             CheckInteraction();
+            StartCoroutine(MoveToPosition(targetNode.transform.position));
         }
 
         else
@@ -145,6 +151,7 @@ public class PlayerControl : MonoBehaviour
         // 아이템
         if (currentNode.hasItem)
         {
+            FindEnemyOnNode(currentNode);
             CollectItem();
             return;
         }
@@ -171,18 +178,37 @@ public class PlayerControl : MonoBehaviour
 
     void FindEnemyOnNode(Node node) 
     {
-        EnemyControl[] enemies = FindObjectsOfType<EnemyControl>();
+
         foreach (var enemy in enemies)
         {
+            Debug.Log($"Checking enemy: {enemy.name}, currentNode: {enemy.currentNode?.name}, target node: {node.name}");
             if (enemy.currentNode == node && enemy.isDead == false)
             {
-                enemy.Kill();
+
+
+                if (enemy.isTarget) // Target
+                {
+                    Time.timeScale = 0.3f; //  Slow Motion
+                    Time.fixedDeltaTime = 0.02f * Time.timeScale; //  Slow Motion
+
+                    enemy.Kill();
+
+                    GameManager.I.killedTarget = true;
+                    GameManager.I.isGameStart = false;
+                    StartCoroutine(ClearLevel());
+                }
+                else    // Normal
+                {
+                    enemy.Kill();
+                }
+
             }
             if (enemy.nextNode == node && enemy.isDead == false)
             {
                 enemy.isStatic = false;
                 Die();
             }
+           
         }
     }
 
@@ -370,22 +396,36 @@ public class PlayerControl : MonoBehaviour
 
         GameManager.I.isGameover = true;
         Debug.Log("Game Over!!");
+
+        StartCoroutine(DelayRestart(2f));
+    }
+    IEnumerator DelayRestart(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        UIManager.I.OnSceneReload();
     }
     IEnumerator ClearLevel()   // 클리어 처리
     {
-        yield return new WaitUntil(()=> GameManager.I.isGameStart == false);
+        yield return new WaitUntil(() => GameManager.I.isGameStart == false);
+
 
         AchievementManager.I.SetLevelCleared(GameManager.I.currentLevel);   // Clear Level Save
         AchievementManager.I.EvaluateAchievements();    // Clear Achievement save
 
         yield return new WaitForSeconds(1f);
 
+        if (GameManager.I.killedTarget) // Rese TimeScale
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f;
+        }
+
         UIManager.I.OnClearPopup();
         for (int i = 0; i < UIManager.I.stamps.Count; i++) // 업적에 해당하는 도장 키기
         {
             if (AchievementManager.I.IsLevelAchievment(GameManager.I.currentLevel, i + 1))
             {
-                
+
                 UIManager.I.stamps[i].SetActive(true);
             }
         }

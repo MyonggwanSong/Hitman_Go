@@ -66,9 +66,14 @@ public class DrawLine : MonoBehaviour
         Vector3 startPoint = transform.position;
         Vector3 endPoint = targetNode.transform.position;
         Vector3 direction = (endPoint - startPoint).normalized;
-
+        
         float normalNodeRadius = 0.1f; 
         float goalNodeRadius = 0.6f;
+
+        Node nodeFrom = GetComponent<Node>();
+        if (nodeFrom.isGoalNode)
+            startPoint += direction * goalNodeRadius;
+
 
         float nodeRadius = targetNode.isGoalNode ? goalNodeRadius : normalNodeRadius; // 노드의 크기많큼 덜 그리기위함
         startPoint += direction * normalNodeRadius;

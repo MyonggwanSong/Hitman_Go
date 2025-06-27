@@ -16,6 +16,7 @@ public class UIManager : BehaviourSingleton<UIManager>
     public GameObject chapterSelectPanel;
     public GameObject settingsPanel;
     public GameObject chapter1Map;
+    public GameObject resetPanel;
     [Space(20)]
     public GameObject quitPanel;
 
@@ -36,24 +37,36 @@ public class UIManager : BehaviourSingleton<UIManager>
     public List<GameObject> stamps = new List<GameObject>();
     [SerializeField] List<GameObject> noAniStamps = new List<GameObject>();
 
+    [Title("Chapter 1 Levels"), HideField] public bool _b1;
+    [SerializeField] List<GameObject> Levels = new List<GameObject>();
 
 
-    void Start()
+
+    IEnumerator Start()
     {
+        // unrelated by GameManager
+        StartCoroutine(FadeFeedback());
         SetUI();
 
-        StartCoroutine(FadeFeedback());
-    }
+        yield return new WaitUntil(() => GameManager.I.isGameStart);
 
-    void SetUI()
-    {
-        stamps.RemoveAll(node => node == null); // 비어있는 List 삭제
-        noAniStamps.RemoveAll(node => node == null);// 비어있는 List 삭제
+        stamps.RemoveAll(stamp => stamp == null); // 비어있는 List 삭제
+        noAniStamps.RemoveAll(noAniStamp => noAniStamp == null);// 비어있는 List 삭제
+
+
         for (int i = 0; i < noAniStamps.Count; i++) // 업적에 해당하는 도장 키기
         {
             if (AchievementManager.I.IsLevelAchievment(GameManager.I.currentLevel, i + 1))
                 noAniStamps[i].SetActive(true);
+            Debug.Log($"Level{GameManager.I.currentLevel} \n Achievments{i + 1} : {AchievementManager.I.IsLevelAchievment(GameManager.I.currentLevel, i + 1)}");
         }
+
+
+    }
+
+    void SetUI()
+    {
+
         SFXOn(true);
         BGMOn(true);
     }
@@ -64,7 +77,7 @@ public class UIManager : BehaviourSingleton<UIManager>
 
     public void OnClickedGo()
     {
-        if (PlayerPrefs.GetInt($"Level_1_Clear", 0) == 0)   // 새 게임이면 바로 시작
+        if (PlayerPrefs.GetInt($"Level_1_Clear", 0) == 0)   // New User New Game >> Level 1
             OnSceneLoad(1);
 
         if (chapterSelectPanel != null)
@@ -85,11 +98,38 @@ public class UIManager : BehaviourSingleton<UIManager>
         if (settingsPanel != null)
             StartCoroutine(ShowOnly(settingsPanel));
     }
-    public void OnClickedEnterChpater1()
+     public void OnClickedReset()
+    {
+        if (resetPanel != null)
+            StartCoroutine(ShowOnly(resetPanel));
+    }
+
+    // Chapter 1
+    public void OnClickedEnterChpater1(Button btn)
     {
         if (chapter1Map != null)
+        {
+            btn.transform.localScale = Vector3.one;
             StartCoroutine(ShowOnly(chapter1Map));
+        }
+
+
+        for (int i = 0; i < Levels.Count - 1; i++)
+        {
+            if (PlayerPrefs.GetInt($"Level_{i + 1}_Clear", 0) == 1)
+            {
+                Levels[i].SetActive(true);
+            }
+            else
+            {
+                Levels[i].SetActive(false);
+            }
+
+        }
+
     }
+
+    //
     public void OnClickedPopup(Button btn)
     {
         if (quitPanel != null)
@@ -121,13 +161,13 @@ public class UIManager : BehaviourSingleton<UIManager>
 
 
 
-    public void OnButtonHoverEnter(Button btn)
+    public void OnButtonHoverEnter(Button btn)  // 마우스 호버시 버튼 크기 증가
     {
         btn.transform.localScale = btn.transform.localScale * 1.2f;
     }
     public void OnButtonHoverExit(Button btn)
     {
-        btn.transform.localScale = btn.transform.localScale / 1.2f;
+        btn.transform.localScale = Vector3.one;
     }
 
 
@@ -137,11 +177,12 @@ public class UIManager : BehaviourSingleton<UIManager>
         StartCoroutine(FadeFeedback());
 
         yield return new WaitForSeconds(0.5f);
-        mainPanel?.SetActive(false);
-        settingsPanel?.SetActive(false);
-        chapterSelectPanel?.SetActive(false);
-        quitPanel?.SetActive(false);
-        chapter1Map?.SetActive(false);
+        if (mainPanel != null) mainPanel.SetActive(false);
+        if (settingsPanel != null) settingsPanel.SetActive(false);
+        if (chapterSelectPanel != null) chapterSelectPanel.SetActive(false);
+        if (resetPanel != null) resetPanel.SetActive(false);
+        if (quitPanel != null) quitPanel.SetActive(false);
+        if (chapter1Map != null) chapter1Map.SetActive(false);
 
         if (target != null)
             target?.SetActive(true);
@@ -207,5 +248,11 @@ public class UIManager : BehaviourSingleton<UIManager>
     {
         GameManager.I.SetInitialIngame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+        OnClickedBack2Main();
     }
 }

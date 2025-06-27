@@ -31,7 +31,8 @@ public class Item : MonoBehaviour
     }
     void Start()
     {
-        meshs[0].gameObject.SetActive(false);
+        if (!isTargetItem)
+            meshs[0].gameObject.SetActive(false);
     }
 
 
@@ -42,22 +43,25 @@ public class Item : MonoBehaviour
         {
             if (isTargetItem)
             {
-                Destroy(this);
                 GameManager.I.getTargetItem = true;
+                meshs[0].gameObject.SetActive(false);
             }
             else
             {
                 other.GetComponentInParent<PlayerControl>().hasItem = this;
                 IsPicked();
-                Debug.Log("들어옴");
             }
         }
     }
 
     void ChangeMesh(bool b)
     {
-        meshs[0].gameObject.SetActive(b);
-        meshs[1].gameObject.SetActive(!b);
+        if (!isTargetItem)
+        {
+            meshs[0].gameObject.SetActive(b);
+            meshs[1].gameObject.SetActive(!b);
+        }
+
     }
 
     public void IsPicked()
@@ -67,9 +71,8 @@ public class Item : MonoBehaviour
         {
             indicators.Add(Instantiate(indicatorPrefab, n.transform.position + Vector3.up * 0.02f, Quaternion.Euler(new Vector3(90, 0, 0))));
         }
-
-        //return true;
     }
+
 
 
     public IEnumerator ParabolaMoveCoroutine()

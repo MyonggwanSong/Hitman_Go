@@ -20,8 +20,7 @@ public class PlayerSpawner : MonoBehaviour
     spawnedPlayer.transform.LookAt(lookDir);
 
     spawnedPlayer.currentNode = startingNode;
-    spawnedPlayer.allEnemies = FindObjectsOfType<EnemyControl>();   // 처치할 적 
-    GameManager.I.enemyNum = spawnedPlayer.allEnemies.Length;
+ 
 
     // 직접 초기화 호출
     spawnedPlayer.InitializeArrowIndicators();

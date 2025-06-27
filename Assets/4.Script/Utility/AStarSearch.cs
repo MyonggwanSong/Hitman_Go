@@ -53,10 +53,11 @@ public static class AStarSearch
         // 경로 없음
         return null;
     }
+    
 
     private static float Heuristic(Node a, Node b)
     {
-        return Vector3.Distance(a.transform.position, b.transform.position); // 노드 a,b의 실제 거리
+        return Vector3.Distance(a.transform.position, b.transform.position); // 노드 a,b의 실제 거리 >> 
     }
 
     private static float Distance(Node a, Node b)
